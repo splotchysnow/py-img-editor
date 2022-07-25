@@ -1,0 +1,20 @@
+1) Using the fill option
+The fill option accepts three values 'x', 'y', and 'both'. These options allow the widget to fill available space along the x-axis, y-axis, and both.
+
+If you add the fill='x' to the first widget like this:
+
+box1.pack(
+    ipadx=10,
+    ipady=10,
+    fill='x'
+)
+
+When you use the fill option, the area of each widget can fill is constrained by those allocated areas.
+
+
+2. Using the expand option
+box1.pack(
+    ipadx=10,
+    ipady=10,
+    expand=True
+)
