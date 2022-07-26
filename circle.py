@@ -1,36 +1,42 @@
 import cv2
-import numpy
-import sys
-
-img = cv2.imread(cv2.samples.findFile("whiteBoard.jpeg"), cv2.IMREAD_UNCHANGED)
-x = int(input("x position: "))
-y = int(input("y position: "))
-r = int(input("radius: "))
-color = (255, 0, 0)
-cv2.circle(img, (x, y), r, color, 1)
+import numpy as np
 
 
+drawing=False # true if mouse is pressed
+mode=True # if True, draw rectangle. Press 'm' to toggle to curve
+
+# mouse callback function
+def draw_circle(event,x,y,flags,param):
+    global ix,iy,drawing, mode
+
+    if event == cv2.EVENT_LBUTTONDOWN:
+        ix,iy=x,y
+    elif event == cv2.EVENT_LBUTTONUP:
+        drawing = False
+        if mode == True:
+            cv2.circle(img,( int((x + ix)/2), int((y + iy)/2)), int(abs(x - ix)/2),(100,100,100), 3)        
 
 
-# posList = []
-# def click_event(event, x, y, flags, param):
-#     if event == cv2.EVENT_LBUTTONDOWN:
-#        # draw circle here (etc...)
-#        posList.append((x, y))
+img = np.zeros((600,600,1), np.uint8)
+cv2.namedWindow('Window')
+cv2.setMouseCallback('Window',draw_circle)
+while(1):
+    cv2.imshow('Window',img)
+    k=cv2.waitKey(1)&0xFF
+    if k==27:
+        break
+cv2.destroyAllWindows()
+
+
+
+
+
+
 
 # img = cv2.imread(cv2.samples.findFile("whiteBoard.jpeg"), cv2.IMREAD_UNCHANGED)
-# img = cv2.resize(img,(320,240))
-
-# while(True):
-#     cv2.imshow("img", img)
-
-#     cv2.setMouseCallback("img", click_event)
-#     cv2.waitKey(1)
-#     leng = len(posList)
-#     if leng == 2:
-#         pos_x = int ((posList[0][0] + posList[1][0]) / 2)
-#         pos_y = int ((posList[0][1] + posList[1][1]) / 2)
-#         radius = int(abs((posList[0][0] - posList[len - 2][0]) / 2))
-#         color = (255,0,0)
-#         cv2.circle(img, (pos_x, pos_y), radius, color, 1)
+# x = int(input("x position: "))
+# y = int(input("y position: "))
+# r = int(input("radius: "))
+# color = (255, 0, 0)
+# cv2.circle(img, (x, y), r, color, 1)
 
