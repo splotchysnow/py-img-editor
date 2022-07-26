@@ -1,0 +1,15 @@
+"""
+Take one smaller photo, apply on bigger photo.
+"""
+
+# This import solves the import issues.
+import cv2 as cv
+import numpy
+import sys
+
+#read in the image data.
+stk = cv.imread(cv.samples.findFile("./img/kawai.jpg"), cv.IMREAD_UNCHANGED)
+bg = cv.imread(cv.samples.findFile("./img/back.jpg"), cv.IMREAD_UNCHANGED)
+
+if stk is None or bg is None:
+    sys.exit("One or both images not exist")
