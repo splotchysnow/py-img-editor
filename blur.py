@@ -1,5 +1,5 @@
 """
-Create the backend for the GUI.py to have functions that edits the images with the opencv modules.
+Bluring Features that allows the user to blur the images with customizable
 """
 
 # This import solves the import issues.
@@ -8,7 +8,7 @@ import numpy
 import sys
 
 #read in the image data.
-img = cv.imread(cv.samples.findFile("img\kawai.jpg"), cv.IMREAD_UNCHANGED)
+img = cv.imread(cv.samples.findFile("./img/kawai.jpg"), cv.IMREAD_UNCHANGED)
 
 if img is None:
     sys.exit("Image not exist")
