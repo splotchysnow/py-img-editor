@@ -1,6 +1,6 @@
 # This import solves the import issues.
 from operator import truediv
-from turtle import width, window_height
+from turtle import pensize, width, window_height
 from warnings import catch_warnings
 import cv2 as cv
 import numpy
@@ -54,7 +54,8 @@ print(img[0][0])
 current_x_coordinate = line_begin_x
 current_y_coordinate = line_begin_y
 pen_speed = 1
-color = (0,0,0) # White
+pen_size = 1000
+color = [255,255,255] # Black
 
 # This draws a straight line down and right.
 # while(True):
@@ -73,9 +74,12 @@ color = (0,0,0) # White
 #     else:
 #         break
 
+# Update: EVERYTIME THE WRITE HAPPENDS< ALSO CHANGES PEN FROM LEFT TO RIGHT. and Up and down by pen_size.
+
 while(True):
-    #drawing the coordinate.
-    img[current_y_coordinate][current_x_coordinate] = [0,0,255]
+    #drawing the coordinate. two so that it draws big from left to right. up to down.
+    img[current_y_coordinate][current_x_coordinate-pen_size:current_x_coordinate+pen_size] = color
+    # img[current_y_coordinate-pen_size:current_y_coordinate+pen_size][current_x_coordinate] = color
     if(current_x_coordinate != line_end_x):
         if(current_x_coordinate < line_end_x):
             current_x_coordinate+= pen_speed
