@@ -13,26 +13,24 @@ img = cv.imread(cv.samples.findFile("img\kawai.jpg"), cv.IMREAD_UNCHANGED)
 if img is None:
     sys.exit("Image not exist")
 
-#change file size if needed
+#change file size if needed (unused)
 scale_percent = 100 # percent of original size
 width = int(img.shape[1] * scale_percent / 100)
 height = int(img.shape[0] * scale_percent / 100)
 dim = (width, height)
   
-# resize image
+#resize image (unused)
 resized = cv.resize(img, dim, interpolation = cv.INTER_AREA)
-
-
-print(type(img)) 
-print(img.shape)
-#print(numpy.asarray(img))
 
 #save image to rewritable array 
 img_np = numpy.array(img)
-#create np array to store the 3d array of blurred image
-blur_np = img_np.copy()
 
-#set the blurring degree
+"""blurring whole image, controlable variables: deg
+"""
+#create np array to store the 3d array of whole blurred image
+blur_whole = img_np.copy()
+
+#set the blurring degree, smaller number equals more blur, deg>=0
 deg = 0
 
 #set counter to 0
@@ -43,28 +41,56 @@ for x in range(0, len(img_np)-1):
         if (x<(len(img_np)-4) and y<(len(img_np[x])-4)) and i >= deg: #change one every i+1 pixel
             for z in range(0,2):
                 #average the upper, left, bottom, right pixels of original image and save to blur numpy array
-                blur_np[x][y][z]=(int(img_np[x-3][y-3][z])+int(img_np[x+3][y+3][z])+int(img_np[x+3][y-3][z])+int(img_np[x-3][y+3][z]))/4
+                blur_whole[x][y][z]=(int(img_np[x-3][y-3][z])+int(img_np[x+3][y+3][z])+int(img_np[x+3][y-3][z])+int(img_np[x-3][y+3][z]))/4
             i = 0 #reset counter
         else:
             #increment counter by 1
             i += 1  
-        
+            
+"""blurring partial image, controlable variables: part_x, part_y, area, lvl
+""" 
+#create np array to store the 3d array of partial blurred image
+blur_part = img_np.copy()
 
-#for debug usage, print 3d array of blurred image 
-#print(blur_np)
+p_x = 30 #x coordinate of the center of part blurring, 0 to 100 from left to right
+p_y = 50 #y coordinate of the center of part blurring, 0 to 100 from top to down
+area = 50 #percentage of area size to blur, 1 to 100 
+lvl = 1 #higher indicated more blurred, lvl>1 (a number too high may cause a loop that goes on foreeeeevvvver)
 
-#Gaussian Blurring method testing
-blur = cv.GaussianBlur(img, (25,25),0)
+#center of part blurring in pixels
+c_x = len(img_np)*p_x/100 
+c_y = len(img_np[0])*p_x/100
+#radius to blur in pixels
+c_area = min(len(img_np), len(img_np[0]))*area/100/2
+
+print(len(img_np))
+print(len(img_np[0]))
+print(c_x)
+print(c_y)
+print(c_area)
+
+
+#loop through the numpy 3d array
+for x in range(0, len(img_np)-1):
+     for y in range(0, len(img_np[0])-1):
+         if (x<(len(img_np)-4) and y<(len(img_np[x])-4)) and (x-c_x)**2 + (y-c_y)**2 < c_area**2: #change every pixel in range selected
+             for z in range(0,2):
+                 #average the upper, left, bottom, right pixels of original image and save to partial blur numpy array
+                 blur_part[x][y][z]=(int(img_np[x-3][y-3][z])+int(img_np[x+3][y+3][z])+int(img_np[x+3][y-3][z])+int(img_np[x-3][y+3][z]))/4
+
+       
+
 
 #set the window size to be controllable and fixed porpotion.    
 cv.namedWindow('My Image', cv.WINDOW_NORMAL)
 
-#display blurred image
-cv.imshow('My Image', blur_np)
+#display blurred image 
+cv.imshow('My Image', blur_part)
 
 #wait for keystroke in the window， then destroy
 cv.waitKey(0)
 cv.destroyAllWindows()
 
-#write to output image file
-cv.imwrite("out_images/blur.png", blur_np)
+#write blurred images to output image file
+cv.imwrite("out_images/blur_whole.png", blur_whole)
+cv.imwrite("out_images/blur_part.png", blur_part)
