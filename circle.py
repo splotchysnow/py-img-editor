@@ -11,6 +11,7 @@ def draw_circle(event,x,y,flags,param):
 
     if event == cv2.EVENT_LBUTTONDOWN:
         ix,iy=x,y
+        drawing = True
     elif event == cv2.EVENT_LBUTTONUP:
         drawing = False
         if mode == True:
@@ -22,8 +23,8 @@ cv2.namedWindow('Window')
 cv2.setMouseCallback('Window',draw_circle)
 while(1):
     cv2.imshow('Window',img)
-    k=cv2.waitKey(1)&0xFF
-    if k==27:
+    k = cv2.waitKey(1)&0xFF
+    if k == 27:
         break
 cv2.destroyAllWindows()
 
