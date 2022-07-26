@@ -131,22 +131,6 @@ def darkScale(img,output_file_name):
             img_[i][j] = [biggestValue,biggestValue,biggestValue]
     cv.imwrite("out_images/" + output_file_name,img_)
 
-def avgScale(img,output_file_name):
-    #Deep copy that image.
-    img_ = img.copy()
-    #Get images dimensions.
-    dimensions = img_.shape
-    # Get height width and channels.
-    height = dimensions[0]
-    width = dimensions[1]
-    avgValue = floor(255/3)
-    for i in range(height):
-        for j in range(width):
-            avgValue = floor((img[i][j][0]+img[i][j][1]+img[i][j][2])/3)
-            img[i][j] = [avgValue,avgValue,avgValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
-
-
 def darkScale_Blue(img,output_file_name):
     """
     This function uses light scale and changes the whole image's hue into Blue
@@ -240,4 +224,19 @@ def darkScale_Yellow(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [0,biggestValue,biggestValue]
+    cv.imwrite("out_images/" + output_file_name,img_)
+
+def avgScale(img,output_file_name):
+    #Deep copy that image.
+    img_ = img.copy()
+    #Get images dimensions.
+    dimensions = img_.shape
+    # Get height width and channels.
+    height = dimensions[0]
+    width = dimensions[1]
+    avgValue = floor(255/3)
+    for i in range(height):
+        for j in range(width):
+            avgValue = floor((img[i][j][0]+img[i][j][1]+img[i][j][2])/3)
+            img[i][j] = [avgValue,avgValue,avgValue]
     cv.imwrite("out_images/" + output_file_name,img_)
