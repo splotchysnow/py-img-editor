@@ -13,58 +13,42 @@ img = cv.imread(cv.samples.findFile("1.jpg"), cv.IMREAD_UNCHANGED)
 if img is None:
     sys.exit("Image not exist")
 
+#change file size if needed
+scale_percent = 100 # percent of original size
+width = int(img.shape[1] * scale_percent / 100)
+height = int(img.shape[0] * scale_percent / 100)
+dim = (width, height)
+  
+# resize image
+resized = cv.resize(img, dim, interpolation = cv.INTER_AREA)
+
 
 #print(type(img)) 
 #print(img.shape)
 #print(numpy.asarray(img))
 
 #save image to rewritable array 
-img_np = numpy.asarray(img)
+img_np = numpy.array(resized)
 #create np array to store the 3d array of blurred image
 blur_np = img_np.copy()
 
 #print(len(blur_np)) 
 #print(len(blur_np[0])) 
 
+#set counter to 0
+i = 0
 #loop through the numpy 3d array
-blur_np[0][0] = 1
-
-"""
 for x in range(0, len(blur_np)-1):
     for y in range(0, len(blur_np[x])-1):
-        #average the upper, left, bottom, right pixels of original image and save to blur numpy array
-        if (x>1 and y>1 and x<(len(blur_np)-2) and y<(len(blur_np[x])-2)):
-            #print(x)
-            for i in range(0,2):
-                blur_np[x][y][i] = int(((int(img_np[x-1][y-1][i]))+(int(img_np[x-1][y+1][i]))+(int(img_np[x+1][y-1][i]))+(int(img_np[x+1][y+1][i])))/4)
+        if x<(len(blur_np)-51) and y<(len(blur_np[x])-51) and i==5: #change one every five pixel
+            for z in range(0,2):
+                #print("c")
+                #average the upper, left, bottom, right pixels of original image and save to blur numpy array
+                blur_np[x][y][z] = (((int(img_np[x-50][y-50][z]))+(int(img_np[x-50][y+50][z]))+(int(img_np[x+50][y-50][z]))+(int(img_np[x+50][y+50][z])))/4)
+                i=0 #reset counter
         else:
-            #save the boundarys directly from original image
-            blur_np[x][y] = img_np[x][y]
-"""
-"""
-for x in range(0, len(blur_np)-1):
-    for y in range(0, len(blur_np[x])-1):
-        #save the boundarys directly from original image
-        if x==0 or y==0 or x==len(blur_np-1) or y ==len(blur_np[x]-1):
-            blur_np[x][y] = img_np[x][y]
-        else:
-            #average the upper, left, bottom, right pixels of original image and save to blur numpy array
-            for i in range(0,2):
-                blur_np[x][y] = img_np[x][y]
-                #blur_np[x][y][i] = int(((int(img_np[x-1][y-1][i]))+(int(img_np[x-1][y+1][i]))+(int(img_np[x+1][y-1][i]))+(int(img_np[x+1][y+1][i])))/4)
-"""
-
-"""
-#print(blur_np[len(blur_np)-1][len(blur_np[0])-1][0])
-#blur_np[0][0][2] = img_np[0][0][1]
-#blur_np[len(blur_np)-1][len(blur_np[0])-1][0] = img_np[len(blur_np)-1][len(blur_np[0])-1][0]
-"""
-
-for x in range(0, len(img_np)-1):
-    for y in range(0, len(img_np[x])-1):
-        for i in range(0,2):
-            blur_np[x][y][i] = img_np[x][y][i]
-    
+            #increment counter by 1
+            i += 1  
         
 
 #for debug usage, print 3d array of blurred image 
@@ -84,4 +68,4 @@ cv.waitKey(0)
 cv.destroyAllWindows()
 
 #write to output image file
-cv.imwrite("blur.png", blur)
+cv.imwrite("blur.png", blur_np)
