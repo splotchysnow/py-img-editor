@@ -55,7 +55,7 @@ blur_part = img_np.copy()
 p_x = 30 #x coordinate of the center of part blurring, 0 to 100 from left to right
 p_y = 50 #y coordinate of the center of part blurring, 0 to 100 from top to down
 area = 50 #percentage of area size to blur, 1 to 100 
-lvl = 1 #higher indicated more blurred, lvl>1 (a number too high may cause a loop that goes on foreeeeevvvver)
+lvl = 10 #higher indicated more blurred, lvl>1 (a number too high may cause a loop that goes on foreeeeevvvver)
 
 #center of part blurring in pixels
 c_x = len(img_np)*p_x/100 
@@ -63,20 +63,15 @@ c_y = len(img_np[0])*p_x/100
 #radius to blur in pixels
 c_area = min(len(img_np), len(img_np[0]))*area/100/2
 
-print(len(img_np))
-print(len(img_np[0]))
-print(c_x)
-print(c_y)
-print(c_area)
-
-
 #loop through the numpy 3d array
-for x in range(0, len(img_np)-1):
-     for y in range(0, len(img_np[0])-1):
-         if (x<(len(img_np)-4) and y<(len(img_np[x])-4)) and (x-c_x)**2 + (y-c_y)**2 < c_area**2: #change every pixel in range selected
-             for z in range(0,2):
-                 #average the upper, left, bottom, right pixels of original image and save to partial blur numpy array
-                 blur_part[x][y][z]=(int(img_np[x-3][y-3][z])+int(img_np[x+3][y+3][z])+int(img_np[x+3][y-3][z])+int(img_np[x-3][y+3][z]))/4
+for level in range(1, lvl):
+    for x in range(0, len(img_np)-1):
+        for y in range(0, len(img_np[0])-1):
+            if (x<(len(img_np)-4) and y<(len(img_np[x])-4)) and (x-c_x)**2 + (y-c_y)**2 < c_area**2: #change every pixel in range selected
+                for z in range(0,2):
+                    #average the upper, left, bottom, right pixels of original image and save to partial blur numpy array
+                    blur_part[x][y][z]=(int(img_np[x-3][y-3][z])+int(img_np[x+3][y+3][z])+int(img_np[x+3][y-3][z])+int(img_np[x-3][y+3][z]))/4
+    img_np = blur_part.copy()
 
        
 
