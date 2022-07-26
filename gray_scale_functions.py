@@ -6,6 +6,21 @@ import sys
 from sniffio import current_async_library
 import numpy
 
+# Functions for loading images:
+def loadImg(imgPath):
+    # Try read in the image data.
+    try:
+        img = cv.imread(cv.samples.findFile(imgPath), cv.IMREAD_UNCHANGED)
+    except:
+        sys.exit("Image can't be found")
+
+    #Case where the images dosn't excists.
+    if img is None:
+        sys.exit("Image not exist")
+    
+    return img
+
+
 def lightScale_Blue(img,output_file_name):
     """
     This function uses light scale and changes the whole image's hue into Blue
