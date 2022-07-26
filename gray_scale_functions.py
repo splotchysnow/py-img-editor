@@ -237,6 +237,24 @@ def avgScale(img,output_file_name):
     avgValue = floor(255/3)
     for i in range(height):
         for j in range(width):
-            avgValue = floor((img[i][j][0]+img[i][j][1]+img[i][j][2])/3)
-            img[i][j] = [avgValue,avgValue,avgValue]
+            avgValue = floor((img_[i][j][0]+img_[i][j][1]+img_[i][j][2])/3)
+            img_[i][j] = [avgValue,avgValue,avgValue]
+    cv.imwrite("out_images/" + output_file_name,img_)
+
+def avgImprovedScale(img,output_file_name):
+    """
+        Same functionality as avg scale above but much more improved in terms of algorithm..
+    """
+    #Deep copy that image.
+    img_ = img.copy()
+    #Get images dimensions.
+    dimensions = img_.shape
+    # Get height width and channels.
+    height = dimensions[0]
+    width = dimensions[1]
+    avgValue = floor(255/3)
+    for i in range(height):
+        for j in range(width):
+            avgValue = floor((img_[i][j][0]+img_[i][j][1]+img_[i][j][2])/3)
+            img_[i][j] = [avgValue,avgValue,avgValue]
     cv.imwrite("out_images/" + output_file_name,img_)
