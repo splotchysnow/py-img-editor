@@ -76,6 +76,7 @@ cv.namedWindow('My Image', cv.WINDOW_NORMAL)
 
 #display blurred image 
 cv.imshow('My Image', blur_part)
+cv.imshow('My Image', blur_whole)
 
 #wait for keystroke in the window， then destroy
 cv.waitKey(0)
