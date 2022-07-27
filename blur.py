@@ -71,8 +71,6 @@ for level in range(0, lvl):
     img_np = blur_part.copy()
 
        
-
-
 #set the window size to be controllable and fixed porpotion.    
 cv.namedWindow('My Image', cv.WINDOW_NORMAL)
 
