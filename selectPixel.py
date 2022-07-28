@@ -16,5 +16,4 @@ k = cv.waitKey(0)
 events = [i for i in dir(cv) if 'EVENT' in i]
 print( events )
 
-if event == cv.EVENT_FLAG_LBUTTON:
-    
+# if event == cv.EVENT_FLAG_LBUTTON:
