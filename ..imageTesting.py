@@ -3,6 +3,7 @@ This file purpose is to test all my functions that are written in other librarie
 Author: Guan Li
 """
 from gray_scale_functions import *
+from inversion import *
 #Load Images
 img = loadImg("./img/wired_cat.webp")
 
