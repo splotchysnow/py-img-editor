@@ -78,7 +78,7 @@ def discard_above_threshold(image:np.ndarray, threshold : int, pixel_x : int, pi
     else:
         image[pixel_x][pixel_y] = [255,255,255]
 # Use the two above function and calculate the edges on an image.
-def Edge_Detection_Function(img:np.ndarray, file_name:str, percent:int):
+def Edge_Detection_Function(img:np.ndarray, file_name:str, percent:int) -> np.ndarray:
     """
     summary: take a copy of the orginal image, calculate threashold base on the percentage given in parameter. Then only keep edges of the image.
     The lower the percentage the more edges will be kepted.
@@ -89,10 +89,10 @@ def Edge_Detection_Function(img:np.ndarray, file_name:str, percent:int):
     for i in range(height):
         for j in range(width):
             discard_above_threshold(img_, tH, i, j)
-    outputFile(img,file_name)
+    return outputFile(img_,file_name)
 
 # Size down the image with a given percentage.
-def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int):
+def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int) -> np.ndarray:
     """
     _summary_ : Resize function removes a couple pixels at a time and compiling the image down to a smaller image version.
                 THis file is for percentages.
@@ -109,7 +109,7 @@ def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int):
         for j in range(custom_width):
             new_img[i][j] = img[i*custom_percentage][j*custom_percentage]
 
-    outputFile(new_img, fileName)
+    return outputFile(new_img, fileName)
 
 # TODO: YAYA CLEAN UP THIS FUNCTION. also take out function's sys exit()
 # Select a pixel from the image and then finding all pixels that are related to this color.
@@ -144,58 +144,62 @@ def select_pixels(img: np.ndarray, fileName: str) -> None:
     sys.exit() # to exit from all the processes
 
 # Flip top and bottom in cool visuals.
-def half_reversion_bonus_UD(img:np.ndarray,fileName:str):
+def half_reversion_bonus_UD(img:np.ndarray,fileName:str) -> np.ndarray:
     "Summary: Displays a creepy up and down reverted image."
-    height, width = dimension_img(img)
+    img_ = img.copy()
+    height, width = dimension_img(img_)
     tempStorage = []
     for i in range(1,int(height/2)):
         for j in range(width):
-            tempStorage = img[i][j]
+            tempStorage = img_[i][j]
             # print(height,width,tempStorage,height-i)
-            img[i][j] = img[height-i][j]
-            img[height-i][j] = tempStorage
-    outputFile(img, fileName)
+            img_[i][j] = img_[height-i][j]
+            img_[height-i][j] = tempStorage
+    return outputFile(img_, fileName)
 
 # Flip image left/Right in cool visuals..
 def half_reversion_bonus_LR(img:np.ndarray,fileName:str):
     "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
+    img_ = img.copy()
     height, width = dimension_img(img)
     tempStorage = []
     for i in range(height):
         for j in range(1,int(width/2)):
             # The deep copy is what caused the bug.
-            tempStorage = img[i][j]
+            tempStorage = img_[i][j]
             # print(height,width,tempStorage,height-i)
-            img[i][j] = img[i][width-j]
-            img[i][width-j] = tempStorage
-    outputFile(img, fileName)
+            img_[i][j] = img_[i][width-j]
+            img_[i][width-j] = tempStorage
+    return outputFile(img_, fileName)
 # Flip image upside down.
 def flip_image_up_and_down(img:np.ndarray,fileName:str):
     "Summary: With the image being inputed, the file will be flipped upside down and sent to output."
-    height, width = dimension_img(img)
+    img_ = img.copy()
+    height, width = dimension_img(img_)
     tempStorage = []
     for i in range(1,int(height/2)):
         for j in range(width):
             # The deep copy is what caused the bug.
-            tempStorage = img[i][j].copy()
+            tempStorage = img_[i][j].copy()
             # print(height,width,tempStorage,height-i)
-            img[i][j] = img[height-i][j]
-            img[height-i][j] = tempStorage
-    outputFile(img, fileName)
+            img_[i][j] = img_[height-i][j]
+            img_[height-i][j] = tempStorage
+    return outputFile(img_, fileName)
 
 # Flip image left/Right.
 def flip_image_left_and_right(img:np.ndarray,fileName:str):
     "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
-    height, width = dimension_img(img)
+    img_ = img.copy()
+    height, width = dimension_img(img_)
     tempStorage = []
     for i in range(height):
         for j in range(1,int(width/2)):
             # The deep copy is what caused the bug.
-            tempStorage = img[i][j].copy()
+            tempStorage = img_[i][j].copy()
             # print(height,width,tempStorage,height-i)
-            img[i][j] = img[i][width-j]
-            img[i][width-j] = tempStorage
-    outputFile(img, fileName)
+            img_[i][j] = img_[i][width-j]
+            img_[i][width-j] = tempStorage
+    return outputFile(img, fileName)
 
-
+#
 

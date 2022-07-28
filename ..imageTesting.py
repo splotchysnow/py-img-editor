@@ -2,7 +2,7 @@
 This file purpose is to test all my functions that are written in other libraries.
 Author: Guan Li
 """
-from _gray_scale_functions import *
+from gray_scale_functions import *
 #Load Images
 img = loadImg("./img/wired_cat.webp")
 
@@ -43,7 +43,8 @@ img = loadImg("./img/caokitten.jpg")
 # ----------------------- Test for flip/rotate -----------------------------------------
 # flip_image_up_and_down(img,"flipedCat")
 # flip_image_left_and_right(img,"LRflippedCat")
-half_reversion_bonus_LR(img,"weirdLeft/R Flip")
-half_reversion_bonus_UD(img,"cat double flip")
-lightScale_Red(img, "Flipped and pinked")
-down_size_image(img, "redFlippedDownsized",10)
+img = half_reversion_bonus_LR(img,"weirdLeft/R Flip")
+img = half_reversion_bonus_UD(img,"cat double flip")
+# img = lightScale_Red(img, "Flipped and pinked")
+img = down_size_image(img, "redFlippedDownsized",2)
+img = Edge_Detection_Function(img, "edgeAfterFlip", 3)
