@@ -43,8 +43,21 @@ img = loadImg("./img/caokitten.jpg")
 # ----------------------- Test for flip/rotate -----------------------------------------
 # flip_image_up_and_down(img,"flipedCat")
 # flip_image_left_and_right(img,"LRflippedCat")
-img = half_reversion_bonus_LR(img,"weirdLeft/R Flip")
-img = half_reversion_bonus_UD(img,"cat double flip")
+# img = half_reversion_bonus_LR(img,"weirdLeft/R Flip")
+# img = half_reversion_bonus_UD(img,"cat double flip")
 # img = lightScale_Red(img, "Flipped and pinked")
-img = down_size_image(img, "redFlippedDownsized",2)
-img = Edge_Detection_Function(img, "edgeAfterFlip", 3)
+# img = down_size_image(img, "redFlippedDownsized",2)
+# img = Edge_Detection_Function(img, "edgeAfterFlip", 3)
+# Testing rotation:
+outputFile(img, "raw img")
+
+# It works since rotate 4 times kept the same img
+# img = rotation_right(img, "rotate_right")
+# img = rotation_right(img, "rotate_right")
+# img = rotation_right(img, "rotate_right")
+# rotation_right(img, "rotate_right")
+# It works since rotate 4 times kept the same img
+img = rotation_left(img, "rotate_left")
+img = rotation_left(img, "rotate_left")
+img = rotation_left(img, "rotate_left")
+rotation_left(img, "rotate_left")

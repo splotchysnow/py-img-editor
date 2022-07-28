@@ -158,7 +158,7 @@ def half_reversion_bonus_UD(img:np.ndarray,fileName:str) -> np.ndarray:
     return outputFile(img_, fileName)
 
 # Flip image left/Right in cool visuals..
-def half_reversion_bonus_LR(img:np.ndarray,fileName:str):
+def half_reversion_bonus_LR(img:np.ndarray,fileName:str) -> np.ndarray:
     "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
     img_ = img.copy()
     height, width = dimension_img(img)
@@ -172,7 +172,7 @@ def half_reversion_bonus_LR(img:np.ndarray,fileName:str):
             img_[i][width-j] = tempStorage
     return outputFile(img_, fileName)
 # Flip image upside down.
-def flip_image_up_and_down(img:np.ndarray,fileName:str):
+def flip_image_up_and_down(img:np.ndarray,fileName:str) -> np.ndarray:
     "Summary: With the image being inputed, the file will be flipped upside down and sent to output."
     img_ = img.copy()
     height, width = dimension_img(img_)
@@ -187,7 +187,7 @@ def flip_image_up_and_down(img:np.ndarray,fileName:str):
     return outputFile(img_, fileName)
 
 # Flip image left/Right.
-def flip_image_left_and_right(img:np.ndarray,fileName:str):
+def flip_image_left_and_right(img:np.ndarray,fileName:str) -> np.ndarray:
     "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
     img_ = img.copy()
     height, width = dimension_img(img_)
@@ -201,5 +201,32 @@ def flip_image_left_and_right(img:np.ndarray,fileName:str):
             img_[i][width-j] = tempStorage
     return outputFile(img, fileName)
 
-#
 
+def rotation_left(img:np.ndarray, fileName:str) -> np.ndarray:
+    """ Rotate image to the left."""
+    # This is flipped on purpose.
+    width, height = dimension_img(img)
+    # print(width,height)
+
+    #Create a new image, blank with a rotated dimensions.
+    new_img = np.zeros((height,width,3), dtype=np.uint8)
+
+    for i in range(1,height):
+        for j in range(width):
+            new_img[i][j] = img[j][height-i]
+    
+    return outputFile(new_img,fileName)
+
+def rotation_right(img:np.ndarray, fileName:str) -> np.ndarray:
+    """ Rotate image to the right."""
+    # This is flipped on purpose.
+    width, height = dimension_img(img)
+
+    #Create a new image, blank with a rotated dimensions.
+    new_img = np.zeros((height,width,3), dtype=np.uint8)
+
+    for i in range(height):
+        for j in range(1,width):
+            new_img[i][j] = img[width-j][i]
+    
+    return outputFile(new_img,fileName)
