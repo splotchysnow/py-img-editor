@@ -1,10 +1,9 @@
 
 from math import floor
+from time import time
 from warnings import catch_warnings
 import cv2 as cv
 import sys
-from sniffio import current_async_library
-import numpy
 
 # Functions for loading images:
 def loadImg(imgPath):
