@@ -14,13 +14,13 @@ if img is None:
     sys.exit("Image not exist")
 
 #change file size if needed (unused)
-scale_percent = 100 # percent of original size
-width = int(img.shape[1] * scale_percent / 100)
-height = int(img.shape[0] * scale_percent / 100)
-dim = (width, height)
+#scale_percent = 100 # percent of original size
+#width = int(img.shape[1] * scale_percent / 100)
+#height = int(img.shape[0] * scale_percent / 100)
+#dim = (width, height)
   
 #resize image (unused)
-resized = cv.resize(img, dim, interpolation = cv.INTER_AREA)
+#resized = cv.resize(img, dim, interpolation = cv.INTER_AREA)
 
 """blurring whole image, controlable variables: deg
 """
@@ -71,13 +71,12 @@ for level in range(0, lvl):
     img_np = blur_part.copy()
 
        
-
-
 #set the window size to be controllable and fixed porpotion.    
 cv.namedWindow('My Image', cv.WINDOW_NORMAL)
 
 #display blurred image 
 cv.imshow('My Image', blur_part)
+cv.imshow('My Image', blur_whole)
 
 #wait for keystroke in the window， then destroy
 cv.waitKey(0)

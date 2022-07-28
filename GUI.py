@@ -38,9 +38,5 @@ entryLabel.pack(side = tk.BOTTOM)
 entryButton.pack(side = tk.RIGHT)
 entryInput.pack(side = tk.RIGHT)
 
-
-
-
-
 # Run the tkinter event loop. Method Listens for events.
 window.mainloop()
