@@ -38,11 +38,12 @@ def dimension_img(img:np.ndarray):
     return height, width
 
 # Functions for output file with File Name:
-def outputFile(img,file_name):
+def outputFile(img,file_name) -> np.ndarray:
     """
     Output the file with the desired output name.
     """
     cv.imwrite("out_images/" + file_name + ".png",img)
+    return img
 
 # Calculate threashhold:
 def calculate_threshold(percentage : int):
@@ -143,7 +144,7 @@ def select_pixels(img: np.ndarray, fileName: str) -> None:
     sys.exit() # to exit from all the processes
 
 # Flip top and bottom in cool visuals.
-def half_reversion_bonus1(img:np.ndarray,fileName:str):
+def half_reversion_bonus_UD(img:np.ndarray,fileName:str):
     "Summary: Displays a creepy up and down reverted image."
     height, width = dimension_img(img)
     tempStorage = []
@@ -155,6 +156,19 @@ def half_reversion_bonus1(img:np.ndarray,fileName:str):
             img[height-i][j] = tempStorage
     outputFile(img, fileName)
 
+# Flip image left/Right in cool visuals..
+def half_reversion_bonus_LR(img:np.ndarray,fileName:str):
+    "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
+    height, width = dimension_img(img)
+    tempStorage = []
+    for i in range(height):
+        for j in range(1,int(width/2)):
+            # The deep copy is what caused the bug.
+            tempStorage = img[i][j]
+            # print(height,width,tempStorage,height-i)
+            img[i][j] = img[i][width-j]
+            img[i][width-j] = tempStorage
+    outputFile(img, fileName)
 # Flip image upside down.
 def flip_image_up_and_down(img:np.ndarray,fileName:str):
     "Summary: With the image being inputed, the file will be flipped upside down and sent to output."
@@ -162,10 +176,25 @@ def flip_image_up_and_down(img:np.ndarray,fileName:str):
     tempStorage = []
     for i in range(1,int(height/2)):
         for j in range(width):
-            tempStorage = img[i][j]
+            # The deep copy is what caused the bug.
+            tempStorage = img[i][j].copy()
             # print(height,width,tempStorage,height-i)
             img[i][j] = img[height-i][j]
             img[height-i][j] = tempStorage
+    outputFile(img, fileName)
+
+# Flip image left/Right.
+def flip_image_left_and_right(img:np.ndarray,fileName:str):
+    "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
+    height, width = dimension_img(img)
+    tempStorage = []
+    for i in range(height):
+        for j in range(1,int(width/2)):
+            # The deep copy is what caused the bug.
+            tempStorage = img[i][j].copy()
+            # print(height,width,tempStorage,height-i)
+            img[i][j] = img[i][width-j]
+            img[i][width-j] = tempStorage
     outputFile(img, fileName)
 
 

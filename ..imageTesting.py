@@ -41,4 +41,9 @@ img = loadImg("./img/caokitten.jpg")
 # select_pixels(img,"EditedKitty")
 
 # ----------------------- Test for flip/rotate -----------------------------------------
-flip_image_up_and_down(img,"flipedCat")
+# flip_image_up_and_down(img,"flipedCat")
+# flip_image_left_and_right(img,"LRflippedCat")
+half_reversion_bonus_LR(img,"weirdLeft/R Flip")
+half_reversion_bonus_UD(img,"cat double flip")
+lightScale_Red(img, "Flipped and pinked")
+down_size_image(img, "redFlippedDownsized",10)

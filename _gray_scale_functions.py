@@ -19,7 +19,7 @@ def lightScale_Blue(img,output_file_name):
         for j in range(width):
             smallestValue = min(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [smallestValue,0,0]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def lightScale_Green(img,output_file_name):
     #Deep copy that image.
@@ -34,7 +34,7 @@ def lightScale_Green(img,output_file_name):
         for j in range(width):
             smallestValue = min(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [0,smallestValue,0]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def lightScale_Red(img,output_file_name):
     #Deep copy that image.
@@ -49,7 +49,7 @@ def lightScale_Red(img,output_file_name):
         for j in range(width):
             smallestValue = min(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [0,0,smallestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def lightScale_Cyan(img,output_file_name):
     #Deep copy that image.
@@ -64,7 +64,7 @@ def lightScale_Cyan(img,output_file_name):
         for j in range(width):
             smallestValue = min(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [smallestValue,smallestValue,0]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def lightScale_Pink(img,output_file_name):
     #Deep copy that image.
@@ -79,7 +79,7 @@ def lightScale_Pink(img,output_file_name):
         for j in range(width):
             smallestValue = min(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [smallestValue,0,smallestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def lightScale_Yellow(img,output_file_name):
     #Deep copy that image.
@@ -94,7 +94,7 @@ def lightScale_Yellow(img,output_file_name):
         for j in range(width):
             smallestValue = min(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [0,smallestValue,smallestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def lightScale(img,output_file_name):
     #Deep copy that image.
@@ -109,7 +109,7 @@ def lightScale(img,output_file_name):
         for j in range(width):
             smallestValue = min(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [smallestValue,smallestValue,smallestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def darkScale(img,output_file_name):
     #Deep copy that image.
@@ -124,7 +124,7 @@ def darkScale(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [biggestValue,biggestValue,biggestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def darkScale_Blue(img,output_file_name):
     """
@@ -144,7 +144,7 @@ def darkScale_Blue(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [biggestValue,0,0]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def darkScale_Green(img,output_file_name):
     #Deep copy that image.
@@ -159,7 +159,7 @@ def darkScale_Green(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [0,biggestValue,0]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def darkScale_Red(img,output_file_name):
     #Deep copy that image.
@@ -174,7 +174,7 @@ def darkScale_Red(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [0,0,biggestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def darkScale_Cyan(img,output_file_name):
     #Deep copy that image.
@@ -189,7 +189,7 @@ def darkScale_Cyan(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [biggestValue,biggestValue,0]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def darkScale_Pink(img,output_file_name):
     #Deep copy that image.
@@ -204,7 +204,7 @@ def darkScale_Pink(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [biggestValue,0,biggestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def darkScale_Yellow(img,output_file_name):
     #Deep copy that image.
@@ -219,7 +219,7 @@ def darkScale_Yellow(img,output_file_name):
         for j in range(width):
             biggestValue = max(img_[i][j][0],img_[i][j][1],img_[i][j][2])
             img_[i][j] = [0,biggestValue,biggestValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def avgScale(img,output_file_name):
     #Deep copy that image.
@@ -234,7 +234,7 @@ def avgScale(img,output_file_name):
         for j in range(width):
             avgValue = floor((img_[i][j][0]+img_[i][j][1]+img_[i][j][2])/3)
             img_[i][j] = [avgValue,avgValue,avgValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
 
 def avgImprovedScale(img,output_file_name):
     """
@@ -253,4 +253,4 @@ def avgImprovedScale(img,output_file_name):
         for j in range(width):
             avgValue = int((img_[i][j][0]+img_[i][j][1]+img_[i][j][2])/3)
             img_[i][j] = [avgValue,avgValue,avgValue]
-    cv.imwrite("out_images/" + output_file_name,img_)
+    outputFile(img_, output_file_name)
