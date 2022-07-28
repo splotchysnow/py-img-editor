@@ -28,6 +28,8 @@ move_from_img = "mv -i ./out_images/*.png ./arc_img_out/"
 #move things from folder arc to out_images out:
 move_to_img = "mv -i ./arc_img_out/*.png ./out_images"
 
-os.system(index_command)
-os.system(move_from_img)
-os.system(clean_command)
+# os.system(index_command)
+# os.system(move_from_img)
+# os.system(clean_command)
+
+os.system("ls -alt")
