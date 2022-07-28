@@ -48,7 +48,6 @@ def discard_above_threshold(image, threshold : int, pixel_x : int, pixel_y: int)
 
 
 
-
 # Loop through all pixels and get through the matrix.
 #Deep copy that image.
 img_ = img.copy()
