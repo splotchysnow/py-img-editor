@@ -36,6 +36,9 @@ img = loadImg("./img/wired_cat.webp")
 # ----------------------- Test for downSize --------------------------------------
 
 
+# ----------------------- Test for select Pixels -------------------------------
+img = loadImg("./img/caokitten.jpg")
+# select_pixels(img,"EditedKitty")
 
 # ----------------------- Test for flip/rotate -----------------------------------------
 flip_image_up_and_down(img,"flipedCat")

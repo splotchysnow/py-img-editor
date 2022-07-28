@@ -109,6 +109,39 @@ def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int):
             new_img[i][j] = img[i*custom_percentage][j*custom_percentage]
 
     outputFile(new_img, fileName)
+
+# TODO: YAYA CLEAN UP THIS FUNCTION. also take out function's sys exit()
+# Select a pixel from the image and then finding all pixels that are related to this color.
+def select_pixels(img: np.ndarray, fileName: str) -> None:
+    """
+        Summary: TODO: YAYA
+    """
+    # open the image
+    length, width, channel = img.shape
+    bgr = img[20, 20]
+    arr = []
+    #iterate through all the pixels line by line and compare
+    for l in range(width):
+        # print (l)
+        for w in range(length):
+            bgrig = img[w,l]
+            if all(abs(t1 - t2)<=5 for t1, t2 in zip(bgr, bgrig)): 
+                arr.append([w, l])
+                #   print (img[w,l])
+                img[w,l] = (0,0,255)
+    #change pixels with certain color
+    # for i in range(len(arr)):
+    #     img.putpixel((arr[i][0], arr[i][1]), (255,0,0))
+    # img.show()
+    # cv.imshow(ig, numpy.array(ig))
+    outputFile(img,fileName)
+    while True:
+        cv.imshow("caokitten_SP_edited", img)
+        cv.waitKey(0)
+        break
+    cv.destroyAllWindows()
+    sys.exit() # to exit from all the processes
+
 # Flip top and bottom in cool visuals.
 def half_reversion_bonus1(img:np.ndarray,fileName:str):
     "Summary: Displays a creepy up and down reverted image."
@@ -136,4 +169,4 @@ def flip_image_up_and_down(img:np.ndarray,fileName:str):
     outputFile(img, fileName)
 
 
-            
+
