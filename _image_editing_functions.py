@@ -1,6 +1,8 @@
+from fileinput import filename
 from math import floor
 import string
 from time import time
+from turtle import width
 from warnings import catch_warnings
 import cv2 as cv
 import sys
@@ -25,6 +27,22 @@ def loadImg(imgPath:str) -> np.ndarray:
     # print(type(img))
     
     return img
+
+# Functions for exporting the dimension of image.
+def dimension_img(img:np.ndarray):
+    #Get images dimensions.
+    dimensions = img.shape
+    # Get height width and channels.
+    height = dimensions[0]
+    width = dimensions[1]
+    return height, width
+
+# Functions for output file with File Name:
+def outputFile(img,file_name):
+    """
+    Output the file with the desired output name.
+    """
+    cv.imwrite("out_images/" + file_name + ".png",img)
 
 # Calculate threashhold:
 def calculate_threshold(percentage : int):
@@ -64,37 +82,24 @@ def Edge_Detection_Function(img:np.ndarray, file_name:str, percent:int):
     summary: take a copy of the orginal image, calculate threashold base on the percentage given in parameter. Then only keep edges of the image.
     The lower the percentage the more edges will be kepted.
     """
-    # Loop through all pixels and get through the matrix.
-    #Deep copy that image.
     img_ = img.copy()
-    # img_ = numpy.array(img)
-    #Get images dimensions.
-    dimensions = img_.shape
-    # Get height width and channels.
-    height = dimensions[0]
-    width = dimensions[1]
-    smallestValue = 0
-
+    height,width = dimension_img(img_)
     tH = calculate_threshold(percent)
-
     for i in range(height):
         for j in range(width):
             discard_above_threshold(img_, tH, i, j)
-    cv.imwrite("out_images/" + file_name + ".png",img_)
+    outputFile(img,file_name)
+
 # Size down the image with a given percentage.
 def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int):
     """
     _summary_ : Resize function removes a couple pixels at a time and compiling the image down to a smaller image version.
                 THis file is for percentages.
     """
-    # Find that dimension:
-    dimensions = img.shape
-    # Get height width and channels.
-    height = dimensions[0]
-    width = dimensions[1]
+    # Calculate the resized dimension.
+    height, width = dimension_img(img)
     custom_height = int(height/custom_percentage)
     custom_width = int(width/custom_percentage)
-    
     #Create a new image, blank with this dimension.
     new_img = np.zeros((custom_height,custom_width,3), dtype=np.uint8)
 
@@ -103,7 +108,32 @@ def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int):
         for j in range(custom_width):
             new_img[i][j] = img[i*custom_percentage][j*custom_percentage]
 
-    cv.imwrite("out_images/" + fileName + ".png" ,new_img)    
+    outputFile(new_img, fileName)
+# Flip top and bottom in cool visuals.
+def half_reversion_bonus1(img:np.ndarray,fileName:str):
+    "Summary: Displays a creepy up and down reverted image."
+    height, width = dimension_img(img)
+    tempStorage = []
+    for i in range(1,int(height/2)):
+        for j in range(width):
+            tempStorage = img[i][j]
+            # print(height,width,tempStorage,height-i)
+            img[i][j] = img[height-i][j]
+            img[height-i][j] = tempStorage
+    outputFile(img, fileName)
+
 # Flip image upside down.
 def flip_image_up_and_down(img:np.ndarray,fileName:str):
     "Summary: With the image being inputed, the file will be flipped upside down and sent to output."
+    height, width = dimension_img(img)
+    tempStorage = []
+    for i in range(1,int(height/2)):
+        for j in range(width):
+            tempStorage = img[i][j]
+            # print(height,width,tempStorage,height-i)
+            img[i][j] = img[height-i][j]
+            img[height-i][j] = tempStorage
+    outputFile(img, fileName)
+
+
+            

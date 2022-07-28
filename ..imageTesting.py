@@ -24,11 +24,18 @@ img = loadImg("./img/wired_cat.webp")
 # lightScale_Red(img,"gsd_red.png")
 # lightScale_Cyan(img,"gsd_cyan.png")
 # lightScale_Pink(img,"gsd_pink.png")
-lightScale_Yellow(img,"gsd_yellow.png")
+# lightScale_Yellow(img,"gsd_yellow.png")
 # avgImprovedScale(img, "imp.png")
 
 # ----------------------- End of test -------------------------------------------
 
 
 # ----------------------- Test for edge Detection --------------------------------
-Edge_Detection_Function(loadImg("./img/wired_cat.webp"), "cat_edge_detection.png", 70)
+# Edge_Detection_Function(loadImg("./img/wired_cat.webp"), "cat_edge_detection.png", 70)
+
+# ----------------------- Test for downSize --------------------------------------
+
+
+
+# ----------------------- Test for flip/rotate -----------------------------------------
+flip_image_up_and_down(img,"flipedCat")
