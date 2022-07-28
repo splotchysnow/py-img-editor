@@ -10,6 +10,25 @@ img = loadImg("./img/wired_cat.webp")
 
 """
 
+# Calculate threashhold:
+def calculate_threshold(percentage : int):
+    """_summary_
+
+    Args:
+        percentage (int): out of 100, if less than or more than we discard. Represent the percentage of threshold keep,
+        The higher the percentage the less the edges shown.
+    """
+    max_thresh = 255
+    # 101 because I want to avoid div by 0;
+    if(percentage == 100):
+        return 0
+    elif(percentage > 100 or percentage < 0):
+        print("Percentage is wrong")
+        return 255
+    else:
+        return floor(max_thresh / (percentage))
+
+
 # Grab that image and detect Keep threashold above that required.
 def discard_above_threshold(image, threshold : int, pixel_x : int, pixel_y: int):
     """
@@ -26,7 +45,7 @@ def discard_above_threshold(image, threshold : int, pixel_x : int, pixel_y: int)
     else:
         image[pixel_x][pixel_y] = [255,255,255]
 
-    
+
 
 
 
@@ -40,7 +59,10 @@ dimensions = img_.shape
 height = dimensions[0]
 width = dimensions[1]
 smallestValue = 0
+
+tH = calculate_threshold(90)
+
 for i in range(height):
     for j in range(width):
-        discard_above_threshold(img_, 80, i, j)
+        discard_above_threshold(img_, tH, i, j)
 cv.imwrite("out_images/" + "edgeDetection.png",img_)
