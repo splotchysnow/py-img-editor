@@ -1,8 +1,6 @@
 from typing import List
 from gray_scale_functions import *
 
-img = loadImg("./img/wired_cat.webp")
-
 """
 
     Brainstorm: The lower the image the darker.
@@ -46,22 +44,23 @@ def discard_above_threshold(image, threshold : int, pixel_x : int, pixel_y: int)
         image[pixel_x][pixel_y] = [255,255,255]
 
 
+def Edge_Detection_Function(img, file_name, percent):
+    # Loop through all pixels and get through the matrix.
+    #Deep copy that image.
+    img_ = img.copy()
+    # img_ = numpy.array(img)
+    #Get images dimensions.
+    dimensions = img_.shape
+    # Get height width and channels.
+    height = dimensions[0]
+    width = dimensions[1]
+    smallestValue = 0
 
+    tH = calculate_threshold(percent)
 
-# Loop through all pixels and get through the matrix.
-#Deep copy that image.
-img_ = img.copy()
-# img_ = numpy.array(img)
-#Get images dimensions.
-dimensions = img_.shape
-# Get height width and channels.
-height = dimensions[0]
-width = dimensions[1]
-smallestValue = 0
+    for i in range(height):
+        for j in range(width):
+            discard_above_threshold(img_, tH, i, j)
+    cv.imwrite("out_images/" + file_name,img_)    
 
-tH = calculate_threshold(90)
-
-for i in range(height):
-    for j in range(width):
-        discard_above_threshold(img_, tH, i, j)
-cv.imwrite("out_images/" + "edgeDetection.png",img_)
+Edge_Detection_Function(loadImg("./img/wired_cat.webp"), "cat_edge_detection.png", 70)

@@ -4,7 +4,6 @@ from time import time
 from warnings import catch_warnings
 import cv2 as cv
 import sys
-import numpy
 
 # Functions for loading images:
 def loadImg(imgPath):
