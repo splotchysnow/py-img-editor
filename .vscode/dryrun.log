@@ -1,5 +1,4 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/natsu/Documents/ProgrammingProject/py-img-editor'
-echo "none"
-make: Leaving directory `/Users/natsu/Documents/ProgrammingProject/py-img-editor'
- 
+make.exe --dry-run --always-make --keep-going --print-directory
+'make.exe' is not recognized as an internal or external command,
+operable program or batch file.
+

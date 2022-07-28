@@ -12,11 +12,11 @@ from PIL import Image
 import cv2 as cv
 import numpy
 import sys
-import gray_scale_functions
+import _gray_scale_functions
 from IPython.display import display
 
 # open the image
-img = gray_scale_functions.loadImg("./img/caokitten.jpg")
+img = _gray_scale_functions.loadImg("./img/caokitten.jpg")
 #ig = Image.open("./img/caokitten.jpg")
 #pixel = ig.load()
 #get the length and width for the image
