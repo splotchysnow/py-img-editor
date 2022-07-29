@@ -74,8 +74,8 @@ outputFile(img, "raw img")
 img = loadImg("./img/aniaa.jpg")
 
 # Test Change Hue
-for i in range(255):
-    change_hue_3_modes(img, "hue_Blue" + str(i), i)
+for i in range(90,255):
+    change_hue_1_modes(img, "hue_Blue" + str(i), i,0)
 for i in range(255):
     change_hue_3_modes(img, "hue_Green" + str(i), i,1,1,1)
 for i in range(255):
