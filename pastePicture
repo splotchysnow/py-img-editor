@@ -8,16 +8,18 @@ import numpy
 import sys
 
 drawing = False # true if mouse is pressed
-color = (100,100,100)
 # mouse callback function
 def paste_picture(event,x,y,flags,param):
     global ix, iy, size
     if event == cv2.EVENT_LBUTTONDOWN:
         ix,iy = x,y
     elif event == cv2.EVENT_LBUTTONUP:
+        #get the width, height of the pasted picture
         wid = abs(x-ix)
         hgt = abs(y-iy)
+        #call resize function
         resize(wid, hgt)
+        #calculating the offsets for coordinates
         x_offset = min(ix, x)
         y_offset = min(iy, y)
         x_end = max(ix, x)
@@ -51,6 +53,9 @@ while(1):
     if k == 27: # ESE to quit
         break
 cv2.destroyAllWindows()
+
+#write to output image file
+cv2.imwrite("out_images/pastePicture.png", b_img)
 
 
 
