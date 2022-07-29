@@ -136,3 +136,57 @@ def invert_color(img:np.ndarray, fileName:str) -> np.ndarray:
             img_[i][j][2] = 255-img_[i][j][2]
     return outputFile(img_,fileName)
 
+# Inversion.
+def invert_color_improved(img:np.ndarray, fileName:str, amount:int) -> np.ndarray:
+    """ 
+        Controls how much is reverted with the differences in amount. 0-255
+    """
+    img_ = img.copy()
+    # This is flipped on purpose.
+    height, width = dimension_img(img)
+    for i in range(height):
+        for j in range(width):
+            offsetBlue = amount - img_[i][j][0]
+            offsetGreen = amount - img_[i][j][1]
+            offsetRed = amount - img_[i][j][2]
+            if(offsetGreen < 0 or offsetBlue < 0 or offsetRed < 0):
+                if(offsetBlue < 0):
+                    img_[i][j][0] = 255-offsetBlue
+                if(offsetGreen < 0):
+                    img_[i][j][1] = 255-offsetGreen
+                if(offsetRed < 0):
+                    img_[i][j][2] = 255-offsetRed
+            else:
+                img_[i][j][0] = offsetBlue
+                img_[i][j][1] = offsetGreen
+                img_[i][j][2] = offsetRed
+    return outputFile(img_,fileName)
+
+# Chang Hue.
+def change_hue_3_modes(img:np.ndarray, fileName:str, amount:int,mode1=0,mode2=0,mode3=0) -> np.ndarray:
+    """ 
+        Controls how much hue is changed  with the differences in amount. 0-255
+        if all three mode are the same, your swapping one single rgb.
+        if two mode are the same, your swapping 2 of the rgb.
+        if all three mode are different your swapping all which is just inverting.
+    """
+    img_ = img.copy()
+    # This is flipped on purpose.
+    height, width = dimension_img(img)
+    for i in range(height):
+        for j in range(width):
+            offsetMode1 = amount - img_[i][j][mode1]
+            offsetMode2 = amount - img_[i][j][mode2]
+            offsetMode3 = amount - img_[i][j][mode3]
+            if(offsetMode1 < 0 or offsetMode2 < 0 or offsetMode3 < 0):
+                if(offsetMode1 < 0):
+                    img_[i][j][mode1] = 255-img_[i][j][mode1]+amount
+                if(offsetMode2 < 0):
+                    img_[i][j][mode2] = 255-img_[i][j][mode2]+amount
+                if(offsetMode3 < 0):
+                    img_[i][j][mode3] = 255-img_[i][j][mode3]+amount
+            else:
+                img_[i][j][mode1] = offsetMode1
+                img_[i][j][mode2] = offsetMode2
+                img_[i][j][mode3] = offsetMode3
+    return outputFile(img_,fileName)

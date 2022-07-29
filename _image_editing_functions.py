@@ -143,3 +143,4 @@ def select_pixels(img: np.ndarray, fileName: str) -> None:
     cv.destroyAllWindows()
     sys.exit() # to exit from all the processes
 
+# 

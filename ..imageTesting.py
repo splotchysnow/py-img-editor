@@ -38,7 +38,7 @@ img = loadImg("./img/wired_cat.webp")
 
 
 # ----------------------- Test for select Pixels -------------------------------
-img = loadImg("./img/caokitten.jpg")
+# img = loadImg("./img/caokitten.jpg")
 # select_pixels(img,"EditedKitty")
 
 # ----------------------- Test for flip/rotate -----------------------------------------
@@ -69,4 +69,20 @@ outputFile(img, "raw img")
 # img = invert_single_rgb(img,"invert_Red", 2)
 # img = invert_single_rgb(img,"invert_red_Green", 1)
 # invert_single_rgb(img,"invert_ALL_COlor", 0)
-invert_color(img, "invertedColor")
+# invert_color(img, "invertedColor")
+
+img = loadImg("./img/aniaa.jpg")
+
+# Test Change Hue
+for i in range(255):
+    change_hue_3_modes(img, "hue_Blue" + str(i), i)
+for i in range(255):
+    change_hue_3_modes(img, "hue_Green" + str(i), i,1,1,1)
+for i in range(255):
+    change_hue_3_modes(img, "hue_Red" + str(i), i,2,2,2)
+for i in range(255):
+    change_hue_3_modes(img, "hue_C1" + str(i), i,0,1,1)
+for i in range(255):
+    change_hue_3_modes(img, "hue_C2" + str(i), i,0,2,2)
+for i in range(255):
+    change_hue_3_modes(img, "hue_C3" + str(i), i,1,2,2)
