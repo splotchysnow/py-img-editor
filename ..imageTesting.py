@@ -50,7 +50,7 @@ img = loadImg("./img/wired_cat.webp")
 # img = down_size_image(img, "redFlippedDownsized",2)
 # img = Edge_Detection_Function(img, "edgeAfterFlip", 3)
 # Testing rotation:
-outputFile(img, "raw img")
+
 
 # It works since rotate 4 times kept the same img
 # img = rotation_right(img, "rotate_right")
@@ -74,15 +74,38 @@ outputFile(img, "raw img")
 img = loadImg("./img/aniaa.jpg")
 
 # Test Change Hue
-for i in range(90,255):
-    change_hue_1_modes(img, "hue_Blue" + str(i), i,0)
-for i in range(255):
-    change_hue_3_modes(img, "hue_Green" + str(i), i,1,1,1)
-for i in range(255):
-    change_hue_3_modes(img, "hue_Red" + str(i), i,2,2,2)
-for i in range(255):
-    change_hue_3_modes(img, "hue_C1" + str(i), i,0,1,1)
-for i in range(255):
-    change_hue_3_modes(img, "hue_C2" + str(i), i,0,2,2)
-for i in range(255):
-    change_hue_3_modes(img, "hue_C3" + str(i), i,1,2,2)
+# for i in range(255):
+#     print("blue", i)
+#     change_hue_1_modes(img, "ahue_Blue" + str(i), i,0)
+# for i in range(255):
+#     print("Green", i)
+#     change_hue_1_modes(img, "bhue_Green" + str(i), i,1)
+
+# change_hue_1_modes(img, "ahue_Blue" + str(255), 255,0)
+# change_hue_1_modes(img, "bhue_Green" + str(255), 255,1)
+
+# for i in range(132,256):
+#     print("Red", i)
+#     change_hue_1_modes(img, "chue_Red" + str(i), i,2)
+# for i in range(256):
+#     print("C1", i)
+#     change_hue_2_modes(img, "dhue_C1" + str(i), i,0,1)
+# for i in range(256):
+#     print("C2", i)
+#     change_hue_2_modes(img, "ehue_C2" + str(i), i,0,2)
+# for i in range(256):
+#     print("C3", i)
+#     change_hue_2_modes(img, "fhue_C3" + str(i), i,1,2)
+# for i in range(256):
+#     print("invert", i)
+#     change_hue_3_modes(img, "ghue_invert" + str(i), i,0,1,2)
+# print("COMPLTED!")
+img = loadImg("./img/aniaa.jpg")
+outputFile(img, "raw img")
+# img1 = half_reversion_bonus_LR(img,"LR")
+# img2 = half_reversion_bonus_UD(img,"UD")
+
+# img1 = half_reversion_bonus_UD(img1, "LR THEN UD")
+# img2 = half_reversion_bonus_LR(img2, "UD THEN LR")
+img = Edge_Detection_Function(img, "UDLREDGE", 3)
+# img = avgImprovedScale(img, "UDLREDGEGSR")

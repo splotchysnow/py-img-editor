@@ -113,7 +113,7 @@ def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int) -> np.nda
 
 # TODO: YAYA CLEAN UP THIS FUNCTION. also take out function's sys exit()
 # Select a pixel from the image and then finding all pixels that are related to this color.
-def select_pixels(img: np.ndarray, fileName: str) -> None:
+def select_pixels(img: np.ndarray, fileName: str, offset = 5) -> None:
     """
         Summary: TODO: YAYA
     """
@@ -126,7 +126,7 @@ def select_pixels(img: np.ndarray, fileName: str) -> None:
         # print (l)
         for w in range(length):
             bgrig = img[w,l]
-            if all(abs(t1 - t2)<=5 for t1, t2 in zip(bgr, bgrig)): 
+            if all(abs(t1 - t2)<=offset for t1, t2 in zip(bgr, bgrig)): 
                 arr.append([w, l])
                 #   print (img[w,l])
                 img[w,l] = (0,0,255)

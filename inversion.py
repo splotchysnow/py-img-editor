@@ -175,9 +175,9 @@ def change_hue_1_modes(img:np.ndarray, fileName:str, amount:int,mode1=0) -> np.n
     height, width = dimension_img(img)
     for i in range(height):
         for j in range(width):
-            offsetMode1 = amount - img_[i][j][mode1]
+            offsetMode1 = img_[i][j][mode1] - amount
             if(offsetMode1 < 0):
-                img_[i][j][mode1] = 255-img_[i][j][mode1]+amount
+                img_[i][j][mode1] = 255 + offsetMode1
             else:
                 img_[i][j][mode1] = offsetMode1
     return outputFile(img_,fileName)
@@ -195,14 +195,14 @@ def change_hue_2_modes(img:np.ndarray, fileName:str, amount:int,mode1=0,mode2=0)
     height, width = dimension_img(img)
     for i in range(height):
         for j in range(width):
-            offsetMode1 = amount - img_[i][j][mode1]
-            offsetMode2 = amount - img_[i][j][mode2]
+            offsetMode1 = img_[i][j][mode1] - amount
+            offsetMode2 = img_[i][j][mode2] - amount
             if(offsetMode1 < 0):
-                img_[i][j][mode1] = 255-img_[i][j][mode1]+amount
+                img_[i][j][mode1] = 255 + offsetMode1
             else:
                 img_[i][j][mode1] = offsetMode1
             if(offsetMode2 < 0):
-                img_[i][j][mode2] = 255-img_[i][j][mode2]+amount
+                img_[i][j][mode2] = 255 + offsetMode2
             else:
                 img_[i][j][mode2] = offsetMode2
     return outputFile(img_,fileName)
@@ -220,19 +220,19 @@ def change_hue_3_modes(img:np.ndarray, fileName:str, amount:int,mode1=0,mode2=0,
     height, width = dimension_img(img)
     for i in range(height):
         for j in range(width):
-            offsetMode1 = amount - img_[i][j][mode1]
-            offsetMode2 = amount - img_[i][j][mode2]
-            offsetMode3 = amount - img_[i][j][mode3]
+            offsetMode1 = img_[i][j][mode1] - amount
+            offsetMode2 = img_[i][j][mode2] - amount
+            offsetMode3 = img_[i][j][mode3] - amount
             if(offsetMode1 < 0):
-                img_[i][j][mode1] = 255-img_[i][j][mode1]+amount
+                img_[i][j][mode1] = 255 + offsetMode1
             else:
                 img_[i][j][mode1] = offsetMode1
             if(offsetMode2 < 0):
-                img_[i][j][mode2] = 255-img_[i][j][mode2]+amount
+                img_[i][j][mode2] = 255 + offsetMode2
             else:
                 img_[i][j][mode2] = offsetMode2
             if(offsetMode3 < 0):
-                img_[i][j][mode3] = 255-img_[i][j][mode3]+amount
+                img_[i][j][mode3] = 255 + offsetMode3
             else:
                 img_[i][j][mode3] = offsetMode3
     return outputFile(img_,fileName)
