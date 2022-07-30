@@ -1,12 +1,12 @@
-from fileinput import filename
-from math import floor
-import string
-from time import time
-from turtle import width
-from warnings import catch_warnings
-import cv2 as cv
-import sys
+"""
+This file consists of all the nessisary functions for manipulating the image.
+"""
 
+
+from math import floor
+from warnings import catch_warnings
+import sys
+import cv2 as cv
 import numpy as np
 
 # Functions for loading images:
@@ -113,7 +113,7 @@ def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int) -> np.nda
 
 # TODO: YAYA CLEAN UP THIS FUNCTION. also take out function's sys exit()
 # Select a pixel from the image and then finding all pixels that are related to this color.
-def select_pixels(img: np.ndarray, fileName: str) -> None:
+def select_pixels(img: np.ndarray, fileName: str, offset = 5) -> None:
     """
         Summary: TODO: YAYA
     """
@@ -126,7 +126,7 @@ def select_pixels(img: np.ndarray, fileName: str) -> None:
         # print (l)
         for w in range(length):
             bgrig = img[w,l]
-            if all(abs(t1 - t2)<=5 for t1, t2 in zip(bgr, bgrig)): 
+            if all(abs(t1 - t2)<=offset for t1, t2 in zip(bgr, bgrig)): 
                 arr.append([w, l])
                 #   print (img[w,l])
                 img[w,l] = (0,0,255)
@@ -143,63 +143,4 @@ def select_pixels(img: np.ndarray, fileName: str) -> None:
     cv.destroyAllWindows()
     sys.exit() # to exit from all the processes
 
-# Flip top and bottom in cool visuals.
-def half_reversion_bonus_UD(img:np.ndarray,fileName:str) -> np.ndarray:
-    "Summary: Displays a creepy up and down reverted image."
-    img_ = img.copy()
-    height, width = dimension_img(img_)
-    tempStorage = []
-    for i in range(1,int(height/2)):
-        for j in range(width):
-            tempStorage = img_[i][j]
-            # print(height,width,tempStorage,height-i)
-            img_[i][j] = img_[height-i][j]
-            img_[height-i][j] = tempStorage
-    return outputFile(img_, fileName)
-
-# Flip image left/Right in cool visuals..
-def half_reversion_bonus_LR(img:np.ndarray,fileName:str):
-    "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
-    img_ = img.copy()
-    height, width = dimension_img(img)
-    tempStorage = []
-    for i in range(height):
-        for j in range(1,int(width/2)):
-            # The deep copy is what caused the bug.
-            tempStorage = img_[i][j]
-            # print(height,width,tempStorage,height-i)
-            img_[i][j] = img_[i][width-j]
-            img_[i][width-j] = tempStorage
-    return outputFile(img_, fileName)
-# Flip image upside down.
-def flip_image_up_and_down(img:np.ndarray,fileName:str):
-    "Summary: With the image being inputed, the file will be flipped upside down and sent to output."
-    img_ = img.copy()
-    height, width = dimension_img(img_)
-    tempStorage = []
-    for i in range(1,int(height/2)):
-        for j in range(width):
-            # The deep copy is what caused the bug.
-            tempStorage = img_[i][j].copy()
-            # print(height,width,tempStorage,height-i)
-            img_[i][j] = img_[height-i][j]
-            img_[height-i][j] = tempStorage
-    return outputFile(img_, fileName)
-
-# Flip image left/Right.
-def flip_image_left_and_right(img:np.ndarray,fileName:str):
-    "Summary: With the image being inputed, the file will be flipped left and right. and sent to output."
-    img_ = img.copy()
-    height, width = dimension_img(img_)
-    tempStorage = []
-    for i in range(height):
-        for j in range(1,int(width/2)):
-            # The deep copy is what caused the bug.
-            tempStorage = img_[i][j].copy()
-            # print(height,width,tempStorage,height-i)
-            img_[i][j] = img_[i][width-j]
-            img_[i][width-j] = tempStorage
-    return outputFile(img, fileName)
-
-#
-
+# 

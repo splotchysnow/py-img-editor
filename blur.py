@@ -13,15 +13,6 @@ img = cv.imread(cv.samples.findFile("./img/kawai.jpg"), cv.IMREAD_UNCHANGED)
 if img is None:
     sys.exit("Image not exist")
 
-#change file size if needed (unused)
-#scale_percent = 100 # percent of original size
-#width = int(img.shape[1] * scale_percent / 100)
-#height = int(img.shape[0] * scale_percent / 100)
-#dim = (width, height)
-  
-#resize image (unused)
-#resized = cv.resize(img, dim, interpolation = cv.INTER_AREA)
-
 """blurring whole image, controlable variables: deg
 """
 #save image to rewritable array 
