@@ -52,7 +52,7 @@ c_y = len(img_np[0])*p_x/100
 c_area = min(len(img_np), len(img_np[0]))*area/100/2
 
 #loop through the numpy 3d array
-for level in range(0, lvl):
+for level in range(0, 1):
     for x in range(0, len(img_np)-1): #x-axis of pixel
         for y in range(0, len(img_np[0])-1): #y-axis of pixel
             if (x<(len(img_np)-4) and y<(len(img_np[x])-4)) and (x-c_x)**2 + (y-c_y)**2 < c_area**2: #change every pixel in range selected
