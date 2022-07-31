@@ -99,7 +99,9 @@ def down_size_image(img:np.ndarray,fileName:str,custom_percentage:int) -> np.nda
     """
     # Calculate the resized dimension.
     height, width = dimension_img(img)
+    
     custom_height = int(height/custom_percentage)
+    
     custom_width = int(width/custom_percentage)
     #Create a new image, blank with this dimension.
     new_img = np.zeros((custom_height,custom_width,3), dtype=np.uint8)
