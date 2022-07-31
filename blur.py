@@ -74,5 +74,5 @@ cv.waitKey(0)
 cv.destroyAllWindows()
 
 #write blurred images to output image file
-cv.imwrite("out_images/blur_whole.png", blur_whole)
-cv.imwrite("out_images/blur_part.png", blur_part)
+cv.imwrite("imgs/blur_whole.png", blur_whole)
+cv.imwrite("imgs/blur_part.png", blur_part)
