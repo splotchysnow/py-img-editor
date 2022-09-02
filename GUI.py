@@ -19,8 +19,6 @@ window.title("Image Editor")
     
 frame = tk.Frame(window)
 frame.pack(side = tk.TOP)
-#path = "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/select.jpg"
-#img = ImageTk.PhotoImage(Image.open(path))
 
 # Create an empty label.
 imgLabel = tk.Label(window)
@@ -34,9 +32,6 @@ def loadIMG():
     imgLabel.config(image=img)
     imgLabel.pack()
     tk.update()
-    
-    #img = cv2.imread(path)
-    #cv2.imshow("window",img)
 
 
 # Create a button for loading images.
