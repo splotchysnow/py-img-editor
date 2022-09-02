@@ -32,9 +32,12 @@ def loadIMG():
     try:
         img = ImageTk.PhotoImage(Image.open(path))
     except(FileNotFoundError):
+        # the case that path is wrong
         wrong_path = "Doesn't exist image in the path \"" + path + "\""
         tk.messagebox.showwarning(title="Wrong Path", message=wrong_path)
     except:
+        # for some reason we don't know, some picture cannot be processing,
+        # even they are .jpg just as others
         tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
     imgLabel.config(image=img)
     imgLabel.pack()
@@ -47,6 +50,7 @@ loadImgButton = tk.Button(
     text="Load Img",
     bg="white",
     fg="black",
+    # once load button got clicked, execute loadIMG function
     command=loadIMG
 )
 
