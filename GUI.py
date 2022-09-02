@@ -8,8 +8,6 @@ import cv2
 from pickle import FRAME
 import tkinter as tk
 from turtle import left
-# from PIL import ImageTk, Image
-
 from matplotlib.pyplot import text
 
 # Create an instance of Tkinter's Tk class. assign it to window variables.
