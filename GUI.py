@@ -19,47 +19,25 @@ window.title("Image Editor")
     
 frame = tk.Frame(window)
 frame.pack(side = tk.TOP)
-path = "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/kawai.jpg"
-img = ImageTk.PhotoImage(Image.open(path))
+#path = "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/select.jpg"
+#img = ImageTk.PhotoImage(Image.open(path))
 
 # Create an empty label.
-imgLabel = tk.Label(window, image = None)
+imgLabel = tk.Label(window)
 
 entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")
 
 
 def loadIMG():
-    # Declare path for the image inputs.
     path = entryInput.get()
-    # path = "img/ani.jpg"
+    img = ImageTk.PhotoImage(Image.open(path))
+    imgLabel.config(image=img)
+    imgLabel.pack()
+    tk.update()
     
-    
-    # print(path)
-    # print(type(path))
-    # print(type(Image.open(path)))
-    
-    # type(img)
-    
-    #-------------
-    load = Image.open("img/ani.jpg")
-    render = ImageTk.PhotoImage(load)
-    img = Label(self, image=render)
-    img.image = render
-    img.pack()
-    #-------------
-    
-    
-    # img = ImageTk.PhotoImage(Image.open(path))
-    # pic._image_ref = img
- 
-   
-    # ---- try call front empty label ----   
-    # img = Image.open(path)
-    # render = ImageTk.PhotoImage(img)
-    
-    # imgLabel.config(image = render)
-    # imgLabel.pack(side = tk.TOP)
-    # --------------------------------------
+    #img = cv2.imread(path)
+    #cv2.imshow("window",img)
+
 
 # Create a button for loading images.
 loadImgButton = tk.Button(
