@@ -2,6 +2,7 @@
 Create GUI with Tkinter for the software that we are designing.
 """
 from email.mime import image
+from gc import callbacks
 from PIL import Image, ImageTk
 import cv2
 from pickle import FRAME
@@ -28,7 +29,13 @@ entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suf
 
 def loadIMG():
     path = entryInput.get()
-    img = ImageTk.PhotoImage(Image.open(path))
+    try:
+        img = ImageTk.PhotoImage(Image.open(path))
+    except(FileNotFoundError):
+        wrong_path = "Doesn't exist image in the path \"" + path + "\""
+        tk.messagebox.showwarning(title="Wrong Path", message=wrong_path)
+    except:
+        tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
     imgLabel.config(image=img)
     imgLabel.pack()
     tk.update()
