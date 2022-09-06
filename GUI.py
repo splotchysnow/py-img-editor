@@ -21,18 +21,16 @@ window.title("Image Editor")
 frame = tk.Frame(window)
 frame.pack(side = tk.TOP)
 canvas = tk.Canvas(window)
-canvas.pack(side= tk.BOTTOM)
+canvas.pack(side= tk.TOP)
 
-# Create an empty label.
 
+# Entry is ready to output the address
 entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")
 
-# the default value so we delete later
-entryInput.insert(0, "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/Jump.jpg")
-global img
 def loadIMG(path):
     try:
         # load new image 
+        global img
         img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
         height, width, no_channels = img.shape
     except(FileNotFoundError):
@@ -59,15 +57,13 @@ def saveIMG():
         tk.messagebox.showwarning(title="No Image Loaded Yet", message= "You Have To Have Image To Save")
         
 
-
-
 # Create a button for loading images.
 loadImgButton = tk.Button(
     frame,
     text="Load Img",
     bg="white",
     fg="black",
-    # once load button got clicked, execute loadIMG function
+    # once load button got clicked, loadIMG image
     command=lambda:loadIMG(entryInput.get())
 )
 
@@ -76,6 +72,7 @@ save_button = tk.Button(
     text="Save Img",
     bg="white",
     fg="black",
+    # once save button got clicked, saving image
     command=lambda:saveIMG(entryInput.get())
     
     )
