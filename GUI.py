@@ -9,6 +9,7 @@ from pickle import FRAME
 import tkinter as tk
 from turtle import left
 from matplotlib.pyplot import text
+import numpy
 
 # Create an instance of Tkinter's Tk class. assign it to window variables.
 window = tk.Tk()
@@ -18,9 +19,10 @@ window.title("Image Editor")
     
 frame = tk.Frame(window)
 frame.pack(side = tk.TOP)
+canvas = tk.Canvas(window)
+canvas.pack()
 
 # Create an empty label.
-imgLabel = tk.Label(window)
 
 entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")
 
@@ -28,7 +30,7 @@ entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suf
 def loadIMG():
     path = entryInput.get()
     try:
-        img = ImageTk.PhotoImage(Image.open(path))
+        img = cv2.cvtColor(cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
     except(FileNotFoundError):
         # the case that path is wrong
         wrong_path = "Doesn't exist image in the path \"" + path + "\""
@@ -37,8 +39,11 @@ def loadIMG():
         # for some reason we don't know, some picture cannot be processing,
         # even they are .jpg just as others
         tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
-    imgLabel.config(image=img)
-    imgLabel.pack()
+        
+    height, width, no_channels = img.shape
+    photo = ImageTk.PhotoImage(image = Image.fromarray(img))
+    canvas.config(width = width, height = height)
+    canvas.create_image(0, 0, image=photo, anchor=tk.NW)
     tk.update()
 
 
