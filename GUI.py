@@ -3,6 +3,7 @@ Create GUI with Tkinter for the software that we are designing.
 """
 from email.mime import image
 from gc import callbacks
+from importlib.resources import path
 from PIL import Image, ImageTk
 import cv2
 from pickle import FRAME
@@ -20,7 +21,7 @@ window.title("Image Editor")
 frame = tk.Frame(window)
 frame.pack(side = tk.TOP)
 canvas = tk.Canvas(window)
-canvas.pack()
+canvas.pack(side= tk.BOTTOM)
 
 # Create an empty label.
 
@@ -28,12 +29,10 @@ entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suf
 
 # the default value so we delete later
 entryInput.insert(0, "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/Jump.jpg")
-
-
+global img
 def loadIMG(path):
     try:
-        # load new image
-        global img 
+        # load new image 
         img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
         height, width, no_channels = img.shape
     except(FileNotFoundError):
@@ -45,14 +44,13 @@ def loadIMG(path):
         # even they are .jpg just as others
         return tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
     img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    global photo
     photo = ImageTk.PhotoImage(image = Image.fromarray(img_convert))
     canvas.config(width = width, height = height)
     canvas.create_image(0, 0, image=photo, anchor=tk.NW)
-    canvas.pack()
-    canvas.update()
     # it will give AttributeError: module 'tkinter' has no attribute 'update', but we can just ignor it
 
-def saveIMG(path):
+def saveIMG():
     try:
         cv2.imwrite(path, img)
     except cv2.error as e:
