@@ -24,13 +24,16 @@ canvas = tk.Canvas(window)
 canvas.pack(side= tk.TOP)
 
 
-# Entry is ready to output the address
+# Entry is ready to output the address 
 entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")
 
+# the default value so we delete later
+entryInput.insert(0, "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/Jump.jpg")
+
+global img
 def loadIMG(path):
     try:
         # load new image 
-        global img
         img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
         height, width, no_channels = img.shape
     except(FileNotFoundError):
@@ -63,7 +66,7 @@ loadImgButton = tk.Button(
     text="Load Img",
     bg="white",
     fg="black",
-    # once load button got clicked, loadIMG image
+    # once load button got clicked, loadIMG image to the path
     command=lambda:loadIMG(entryInput.get())
 )
 
@@ -72,7 +75,7 @@ save_button = tk.Button(
     text="Save Img",
     bg="white",
     fg="black",
-    # once save button got clicked, saving image
+    # once save button got clicked, save the image to the path
     command=lambda:saveIMG(entryInput.get())
     
     )
