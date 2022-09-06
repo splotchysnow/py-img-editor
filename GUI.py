@@ -30,8 +30,7 @@ entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suf
 entryInput.insert(0, "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/Jump.jpg")
 
 
-def loadIMG():
-    path = entryInput.get()
+def loadIMG(path):
     try:
         # load new image
         global img 
@@ -49,11 +48,11 @@ def loadIMG():
     photo = ImageTk.PhotoImage(image = Image.fromarray(img_convert))
     canvas.config(width = width, height = height)
     canvas.create_image(0, 0, image=photo, anchor=tk.NW)
-    tk.update()
+    canvas.pack()
+    canvas.update()
     # it will give AttributeError: module 'tkinter' has no attribute 'update', but we can just ignor it
 
-def saveIMG():
-    path = entryInput.get()
+def saveIMG(path):
     try:
         cv2.imwrite(path, img)
     except cv2.error as e:
@@ -71,7 +70,7 @@ loadImgButton = tk.Button(
     bg="white",
     fg="black",
     # once load button got clicked, execute loadIMG function
-    command=lambda:loadIMG
+    command=lambda:loadIMG(entryInput.get())
 )
 
 save_button = tk.Button(
@@ -79,7 +78,8 @@ save_button = tk.Button(
     text="Save Img",
     bg="white",
     fg="black",
-    command=saveIMG
+    command=lambda:saveIMG(entryInput.get())
+    
     )
     
 
