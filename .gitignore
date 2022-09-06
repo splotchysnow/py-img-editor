@@ -3,3 +3,5 @@
 .idea/py-img-editor.iml
 .idea/py-img-editor.iml
 *.png
+*.log
+
