@@ -120,7 +120,5 @@ def create_button_in_operation(fra, fun):
     ).pack(side= tk.LEFT)
     
 
-
-
 if __name__ == "__main__":
     main()
