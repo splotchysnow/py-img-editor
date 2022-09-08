@@ -8,23 +8,27 @@ from PIL import Image, ImageTk
 import cv2
 from pickle import FRAME
 import tkinter as tk
-from turtle import left
+from turtle import fillcolor, left
 from matplotlib.pyplot import text
 import numpy
+import globals
+from fillingColor import filling
+from update import update
 
 
-def main():
 
+
+def main():    
     # Create an instance of Tkinter's Tk class. assign it to window variables.
     global window
     window = tk.Tk()
     # Create Title Label
     window.title("Image Editor")
-    global img
-    img = None
     frame = tk.Frame(window)
     frame.pack(side = tk.TOP)
+    global canvas
     canvas = tk.Canvas(window, height= 20)
+    globals.set_canvas(canvas)
     canvas.pack(side= tk.TOP)
     # Entry is ready to output the address 
     entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")
@@ -38,7 +42,7 @@ def main():
         bg="white",
         fg="black",
     # once load button got clicked, loadIMG image to the path
-        command=lambda:loadIMG(entryInput.get(), canvas)
+        command=lambda:loadIMG(entryInput.get())
     )
     
     save_button = tk.Button(
@@ -49,7 +53,7 @@ def main():
         # once save button got clicked, save the image to the path
         command=lambda:saveIMG(entryInput.get())
     )
-    
+     
     #Load the loading Button onto the Gui
     # Create a label for the GUI that is related to the entry;
     msg = tk.Label(frame, text="Input the Path you to Load or Save")
@@ -66,7 +70,7 @@ def main():
 def operation_side():
         operation_frame = tk.Frame(window)
         operation_frame.pack(side = tk.BOTTOM)
-        create_button_in_operation(operation_frame, print(1))
+        create_button_in_operation(operation_frame, filling)
         create_button_in_operation(operation_frame, print(2))
         create_button_in_operation(operation_frame, print(3))
         create_button_in_operation(operation_frame, print(4))
@@ -76,28 +80,29 @@ def operation_side():
         create_button_in_operation(operation_frame, print(8))
     # Run the tkinter event loop. Method Listens for events.
     
-def loadIMG(path, canvas):
+def loadIMG(path):
+    global img
+        # load new image
+    globals.img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
+    img = globals.img
+    globals.change_img(globals.img)
+    height, width, no_channels = img.shape
+    img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    canvas.config(width = width, height = height)
+    globals.update_canvas(img_convert)
     try:
-        # load new image 
-        img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
-        height, width, no_channels = img.shape
-        img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        global photo
-        photo = ImageTk.PhotoImage(image = Image.fromarray(img_convert))
-        canvas.config(width = width, height = height)
-        canvas.create_image(0, 0, image=photo, anchor=tk.NW)
+        canvas.update()
         operation_side()
     except(FileNotFoundError):
         # the case that path is wrong
         wrong_path = "Doesn't exist image in the path \"" + path + "\""
-        return tk.messagebox.showwarning(title="Wrong Path", message=wrong_path)
+        tk.messagebox.showwarning(title="Wrong Path", message=wrong_path)
     except:
         # for some reason we don't know, some picture cannot be processing,
         # even they are .jpg just as others
-        return tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
+        tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
     # it will give AttributeError: module 'tkinter' has no attribute 'update', but we can just ignor it
     
-
 
 def saveIMG(path):
     try:
@@ -116,8 +121,9 @@ def create_button_in_operation(fra, fun):
         text="function",
         bg="white",
         fg="black",
-        command=lambda:fun
+        command=lambda:fun()
     ).pack(side= tk.LEFT)
+    
     
 
 if __name__ == "__main__":
