@@ -71,6 +71,7 @@ def operation_side():
         operation_frame = tk.Frame(window)
         operation_frame.pack(side = tk.BOTTOM)
         create_button_in_operation(operation_frame, "Filling Color",filling)
+        # for this function, you have to enter the coordinate in terminal, and # filling color is fixed with purple, this will be optimized in the # future
         create_button_in_operation(operation_frame, 1, print(2))
         create_button_in_operation(operation_frame, 2, print(3))
         create_button_in_operation(operation_frame, 3, print(4))
