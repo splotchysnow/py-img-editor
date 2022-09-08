@@ -70,14 +70,14 @@ def main():
 def operation_side():
         operation_frame = tk.Frame(window)
         operation_frame.pack(side = tk.BOTTOM)
-        create_button_in_operation(operation_frame, filling)
-        create_button_in_operation(operation_frame, print(2))
-        create_button_in_operation(operation_frame, print(3))
-        create_button_in_operation(operation_frame, print(4))
-        create_button_in_operation(operation_frame, print(5))
-        create_button_in_operation(operation_frame, print(6))
-        create_button_in_operation(operation_frame, print(7))
-        create_button_in_operation(operation_frame, print(8))
+        create_button_in_operation(operation_frame, "Filling Color",filling)
+        create_button_in_operation(operation_frame, 1, print(2))
+        create_button_in_operation(operation_frame, 2, print(3))
+        create_button_in_operation(operation_frame, 3, print(4))
+        create_button_in_operation(operation_frame, 4, print(5))
+        create_button_in_operation(operation_frame, 5, print(6))
+        create_button_in_operation(operation_frame, 6, print(7))
+        create_button_in_operation(operation_frame, 7, print(8))
     # Run the tkinter event loop. Method Listens for events.
     
 def loadIMG(path):
@@ -113,12 +113,12 @@ def saveIMG(path):
     except NameError:
         tk.messagebox.showwarning(title="No Image Loaded Yet", message= "You Have To Have Image To Save")
 
-def create_button_in_operation(fra, fun):
+def create_button_in_operation(fra, fun_name,fun,):
     tk.Button(
         fra,
         width= 8,
         height= 2,
-        text="function",
+        text=fun_name,
         bg="white",
         fg="black",
         command=lambda:fun()
