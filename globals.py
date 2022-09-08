@@ -10,18 +10,8 @@ img = None
 # canvas is where we display
 canvas = None
 
-# To update the img data in the backend
-def change_img(image):
-    global img
-    img = image
-
 # To update the canvas for the frontend
 def update_canvas(image):
     global photo
     photo = ImageTk.PhotoImage(image = Image.fromarray(image))
     canvas.create_image(0, 0, image=photo, anchor=tk.NW)
-
-# initial canvas
-def set_canvas(can):
-    global canvas
-    canvas = can

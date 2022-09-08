@@ -15,24 +15,23 @@ import globals
 from fillingColor import filling
 
 
-
 def main():    
     # Create an instance of Tkinter's Tk class. assign it to window variables.
     global window
     window = tk.Tk()
+    globals.window = window
     # Create Title Label
     window.title("Image Editor")
     frame = tk.Frame(window)
     frame.pack(side = tk.TOP)
     global canvas
     canvas = tk.Canvas(window, height= 20)
-    globals.set_canvas(canvas)
+    globals.canvas = canvas
     canvas.pack(side= tk.TOP)
     # Entry is ready to output the address 
     entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")
     # the default value so we delete later
     entryInput.insert(0, "/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/Jump.jpg")
-    
     # Create a button for loading images.
     loadImgButton = tk.Button(
         frame,
@@ -42,7 +41,6 @@ def main():
     # once load button got clicked, loadIMG image to the path
         command=lambda:loadIMG(entryInput.get())
     )
-    
     save_button = tk.Button(
         frame,
         text="Save Img",
@@ -51,7 +49,6 @@ def main():
         # once save button got clicked, save the image to the path
         command=lambda:saveIMG(entryInput.get())
     )
-     
     #Load the loading Button onto the Gui
     # Create a label for the GUI that is related to the entry;
     msg = tk.Label(frame, text="Input the Path you to Load or Save")
@@ -93,7 +90,7 @@ def loadIMG(path):
         # load new image
         globals.img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
         img = globals.img
-        globals.change_img(globals.img)
+        # globals.change_img(globals.img)
         height, width, no_channels = img.shape
         # Image.fromarray() will inverse color, here we change back
         img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -111,8 +108,6 @@ def loadIMG(path):
         # even they are .jpg just as others
         tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
     # it will give AttributeError: module 'tkinter' has no attribute 'update', but we can just ignor it
-    
-
 def saveIMG(path):
     try:
         cv2.imwrite(path, img)

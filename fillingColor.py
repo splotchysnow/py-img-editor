@@ -1,15 +1,19 @@
+from email import message
 from email.mime import image
 from hashlib import new
 from threading import stack_size
-from tkinter import Y
+import tkinter as tk
 from traceback import print_list
+from turtle import title
 import cv2
 import numpy
 import globals
+import popup
 # remeber to import globals
 
 
 def filling():
+    popup.popup_filling()
     xp = int(input("x position: "))
     yp = int(input("y position: "))
     
@@ -20,7 +24,7 @@ def filling():
     x_limit = len(img_np) - 1
     y_limit = len(img_np[0]) - 1
 
-    new_color = (200, 100,200)
+    new_color = popup.color
     color = img_np[xp][yp].copy()
 
     visited = {(xp, yp)}
