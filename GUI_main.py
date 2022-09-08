@@ -13,8 +13,6 @@ from matplotlib.pyplot import text
 import numpy
 import globals
 from fillingColor import filling
-from update import update
-
 
 
 
@@ -71,8 +69,18 @@ def operation_side():
         operation_frame = tk.Frame(window)
         operation_frame.pack(side = tk.BOTTOM)
         create_button_in_operation(operation_frame, "Filling Color",filling)
-        # for this function, you have to enter the coordinate in terminal, and # filling color is fixed with purple, this will be optimized in the # future
+        # for fillingColor function, you have to enter the coordinate in terminal, and # filling color is fixed with purple, this will be optimized in the # future
         create_button_in_operation(operation_frame, 1, print(2))
+        #
+        #       IMPORTANT! PLEASE READ THIS,  BY XIAOXIA
+        #       
+        #       1.if after you implement your function, you may see color got inverse or may not. Because Image.fromarray() will inverse, but at some point it reverse back by cvtColor, don't worry if showing wrong color  
+        #
+        #       2. My way is to have no para in the function, then import img from globals.py to process, just a recommend
+        #
+        #       3. if you wanna use the same way with me, import img from globals.py, and globals.update_canvas(img_after_change) in the end will be fine. More illustrate and comments on the fillingColor
+        #
+        #
         create_button_in_operation(operation_frame, 2, print(3))
         create_button_in_operation(operation_frame, 3, print(4))
         create_button_in_operation(operation_frame, 4, print(5))
@@ -82,17 +90,16 @@ def operation_side():
     # Run the tkinter event loop. Method Listens for events.
     
 def loadIMG(path):
-    global img
-        # load new image
-    globals.img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
-    img = globals.img
-    globals.change_img(globals.img)
-    height, width, no_channels = img.shape
-    img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    canvas.config(width = width, height = height)
-    globals.update_canvas(img_convert)
     try:
-        canvas.update()
+        global img
+        # load new image
+        globals.img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
+        img = globals.img
+        globals.change_img(globals.img)
+        height, width, no_channels = img.shape
+        img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        canvas.config(width = width, height = height)
+        globals.update_canvas(img_convert)
         operation_side()
     except(FileNotFoundError):
         # the case that path is wrong

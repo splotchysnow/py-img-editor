@@ -5,7 +5,6 @@ from tkinter import Y
 from traceback import print_list
 import cv2
 import numpy
-import update
 import globals
 
 def filling():
