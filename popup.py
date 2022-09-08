@@ -29,7 +29,6 @@ def submit_filling(input_color, TOP):
     global color
     R, G, B = input_color.split(",")
     color = RGB(int(R),int(G),int(B))
-    TOP.grab_release()
     TOP.destroy()
     
     

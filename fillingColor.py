@@ -9,11 +9,13 @@ import cv2
 import numpy
 import globals
 import popup
+import tkinter as tk
 # remeber to import globals
 
 
 def filling():
     popup.popup_filling()
+    tk.messagebox.showinfo(message="after input the color in popup, please input the position you wanna change in terminal, which will definitely optimize to be operated by mouse later")
     xp = int(input("x position: "))
     yp = int(input("y position: "))
     
