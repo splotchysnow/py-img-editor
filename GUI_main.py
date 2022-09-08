@@ -73,11 +73,11 @@ def operation_side():
         #
         #       IMPORTANT! PLEASE READ THIS,  BY XIAOXIA
         #       
-        #       1.if after you implement your function, you may see color got inverse or may not. Because Image.fromarray() will inverse, but at some point it reverse back by cvtColor, don't worry if showing wrong color  
+        #       1.if after you implement your function, you see color got inverse or may not. Because Image.fromarray() will inverse color, but at some point it reverse back by cvtColor, don't worry if showing wrong color, it will be fixed at high-level
         #
-        #       2. My way is to have no para in the function, then import img from globals.py to process, just a recommend
+        #       2. My way is to have no para in the function, then import img from globals.py to process, just recommend.
         #
-        #       3. if you wanna use the same way with me, import img from globals.py, and globals.update_canvas(img_after_change) in the end will be fine. More illustrate and comments on the fillingColor
+        #       3. if you wanna use the same way as me, import img from globals.py, and globals.update_canvas(img_after_change) in the end will be fine. More illustrates and comments is in the fillingColor
         #
         #
         create_button_in_operation(operation_frame, 2, print(3))
@@ -86,7 +86,6 @@ def operation_side():
         create_button_in_operation(operation_frame, 5, print(6))
         create_button_in_operation(operation_frame, 6, print(7))
         create_button_in_operation(operation_frame, 7, print(8))
-    # Run the tkinter event loop. Method Listens for events.
     
 def loadIMG(path):
     try:
@@ -96,9 +95,12 @@ def loadIMG(path):
         img = globals.img
         globals.change_img(globals.img)
         height, width, no_channels = img.shape
+        # Image.fromarray() will inverse color, here we change back
         img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        # to make the save size as image
         canvas.config(width = width, height = height)
         globals.update_canvas(img_convert)
+        # as the img shows, function buttom will show up
         operation_side()
     except(FileNotFoundError):
         # the case that path is wrong

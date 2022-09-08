@@ -21,7 +21,7 @@ def update_canvas(image):
     photo = ImageTk.PhotoImage(image = Image.fromarray(image))
     canvas.create_image(0, 0, image=photo, anchor=tk.NW)
 
-# initial canvas, have change to optimize if it is nesseary and have more time
+# initial canvas
 def set_canvas(can):
     global canvas
     canvas = can
