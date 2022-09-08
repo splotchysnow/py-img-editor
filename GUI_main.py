@@ -64,7 +64,6 @@ def main():
     
     window.mainloop()
 
-
 def operation_side():
         operation_frame = tk.Frame(window)
         operation_frame.pack(side = tk.BOTTOM)
