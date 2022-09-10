@@ -1,6 +1,7 @@
 """
 Create GUI with Tkinter for the software that we are designing.
 """
+from curses import window
 from email.mime import image
 from gc import callbacks
 from importlib.resources import path
@@ -17,16 +18,12 @@ from fillingColor import filling
 
 def main():    
     # Create an instance of Tkinter's Tk class. assign it to window variables.
-    global window
-    window = tk.Tk()
-    globals.window = window
+    window = globals.window
     # Create Title Label
-    window.title("Image Editor")
     frame = tk.Frame(window)
     frame.pack(side = tk.TOP)
     global canvas
-    canvas = tk.Canvas(window, height= 20)
-    globals.canvas = canvas
+    canvas = globals.canvas
     canvas.pack(side= tk.TOP)
     # Entry is ready to output the address 
     entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")
@@ -58,12 +55,46 @@ def main():
     entryInput.pack(side = tk.LEFT)
     loadImgButton.pack(side=tk.LEFT)
     save_button.pack(side = tk.LEFT)
+    operation_side()
     
     window.mainloop()
 
+    
+def loadIMG(path):
+    try:
+        global img
+        # load new image
+        globals.img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
+        img = globals.img
+        # globals.change_img(globals.img)
+        height, width, no_channels = img.shape
+        # Image.fromarray() will inverse color, here we change back
+        # to make the save size as image
+        canvas.config(width = width, height = height)
+        globals.update_canvas(img)
+        # as the img shows, function buttom will show up
+        globals.operation_frame.pack(side = tk.BOTTOM)
+    except(FileNotFoundError):
+        # the case that path is wrong
+        wrong_path = "Doesn't exist image in the path \"" + path + "\""
+        tk.messagebox.showwarning(title="Wrong Path", message=wrong_path)
+    except:
+        # for some reason we don't know, some picture cannot be processing,
+        # even they are .jpg just as others
+        tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
+    # it will give AttributeError: module 'tkinter' has no attribute 'update', but we can just ignor it
+    
+def saveIMG(path):
+    try:
+        cv2.imwrite(path, img)
+        tk.messagebox.showinfo(title="Image Saved", message="Image Successfully saved in " + path )
+    except cv2.error as e:
+        tk.messagebox.showwarning(title="No suffix or Wrong Path", message= "You May Need To Have Suffix, Such As .jpg or .png")
+    except NameError:
+        tk.messagebox.showwarning(title="No Image Loaded Yet", message= "You Have To Have Image To Save")
+
 def operation_side():
-        operation_frame = tk.Frame(window)
-        operation_frame.pack(side = tk.BOTTOM)
+        operation_frame = globals.operation_frame
         create_button_in_operation(operation_frame, "Filling Color",filling)
         # for fillingColor function, you have to enter the coordinate in terminal, and # filling color is fixed with purple, this will be optimized in the # future
         create_button_in_operation(operation_frame, 1, print(2))
@@ -83,39 +114,6 @@ def operation_side():
         create_button_in_operation(operation_frame, 5, print(6))
         create_button_in_operation(operation_frame, 6, print(7))
         create_button_in_operation(operation_frame, 7, print(8))
-    
-def loadIMG(path):
-    try:
-        global img
-        # load new image
-        globals.img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
-        img = globals.img
-        # globals.change_img(globals.img)
-        height, width, no_channels = img.shape
-        # Image.fromarray() will inverse color, here we change back
-        img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        # to make the save size as image
-        canvas.config(width = width, height = height)
-        globals.update_canvas(img_convert)
-        # as the img shows, function buttom will show up
-        operation_side()
-    except(FileNotFoundError):
-        # the case that path is wrong
-        wrong_path = "Doesn't exist image in the path \"" + path + "\""
-        tk.messagebox.showwarning(title="Wrong Path", message=wrong_path)
-    except:
-        # for some reason we don't know, some picture cannot be processing,
-        # even they are .jpg just as others
-        tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
-    # it will give AttributeError: module 'tkinter' has no attribute 'update', but we can just ignor it
-def saveIMG(path):
-    try:
-        cv2.imwrite(path, img)
-        tk.messagebox.showinfo(title="Image Saved", message="Image Successfully saved in " + path )
-    except cv2.error as e:
-        tk.messagebox.showwarning(title="No suffix or Wrong Path", message= "You May Need To Have Suffix, Such As .jpg or .png")
-    except NameError:
-        tk.messagebox.showwarning(title="No Image Loaded Yet", message= "You Have To Have Image To Save")
 
 def create_button_in_operation(fra, fun_name,fun,):
     tk.Button(
@@ -129,6 +127,5 @@ def create_button_in_operation(fra, fun_name,fun,):
     ).pack(side= tk.LEFT)
     
     
-
 if __name__ == "__main__":
     main()
