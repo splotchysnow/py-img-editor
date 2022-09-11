@@ -23,10 +23,6 @@ def filling():
     pos = tk.IntVar()
     globals.window.bind("<Button-1>", get_post)
     globals.canvas.wait_variable(pos)
-    # xp = int(input("x position: "))
-    # yp = int(input("y position: "))
-    print("x=", xp)
-    print("y=", yp)
     # just import globals.img to the one you wanna edit, or you can just use globals.img as variable to process, but assign a new one would save many word. img will be the form that can be thought as img = imread(something)
     img_np = globals.img
     # img_np = numpy.array(globals.img) also works, if you prefer to make it to be numpy.array, but I don't know it in deeper
