@@ -59,7 +59,7 @@ def main():
     
     window.mainloop()
 
-    
+
 def loadIMG(path):
     try:
         global img
