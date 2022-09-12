@@ -36,7 +36,7 @@ def top_color_change():
 def color_decode():
     global color
     try:
-        B, G, R = color_var.get().split(",")
+        R, G, B = color_var.get().split(",")
         color = (int(R),int(G),int(B))
     except:
         pass
