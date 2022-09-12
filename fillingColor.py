@@ -28,30 +28,33 @@ def filling():
     visited = {(xp, yp)}
     stack = [(xp,yp)]
 
-    tolerance = 0.3
+    tolerance = 10
     while len(stack) > 0:
         (x,y) = stack.pop()
         img_np[x][y] = new_color
         
         if (x - 1, y) not in visited and x > 0:
             visited.add((x - 1, y))
-            if numpy.allclose(img_np[x - 1][y], color, tolerance):
-                
+            if compare_two_pixel(img_np[x - 1][y], color, tolerance):
+            #if numpy.allclose(img_np[x - 1][y], color, tolerance):
                 stack.append((x - 1, y))
         
         if (x + 1, y) not in visited and x < x_limit:
             visited.add((x + 1, y))
-            if numpy.allclose(img_np[x + 1][y], color, tolerance):
+            if compare_two_pixel(img_np[x + 1][y], color, tolerance):
+            # if numpy.allclose(img_np[x + 1][y], color, tolerance):
                 stack.append((x + 1, y))
                 
         if (x, y - 1) not in visited and y > 0:
             visited.add((x, y - 1))
-            if numpy.allclose(img_np[x][y - 1], color, tolerance):
+            if compare_two_pixel(img_np[x][y - 1], color, tolerance):
+            # if numpy.allclose(img_np[x][y - 1], color, tolerance):
                 stack.append((x, y - 1))
         
         if (x, y + 1) not in visited and y < y_limit:
             visited.add((x, y + 1))
-            if numpy.allclose(img_np[x][y + 1], color, tolerance):
+            if compare_two_pixel(img_np[x][y + 1], color, tolerance):
+            # if numpy.allclose(img_np[x][y + 1], color, tolerance):
                 stack.append((x, y + 1))
                 
     # in the end, you HAVE TO update it, img_np is the form of array, you can think of it as imshow(window, img_np) if that helps
@@ -67,3 +70,5 @@ def get_post(event):
     pos.set(1)
     
     
+def compare_two_pixel(curr, standard, tor):
+    return abs(curr[0] - standard[0]) + abs(curr[1] - standard[1]) + abs(curr[2] - standard[2]) <= tor

@@ -36,14 +36,19 @@ def top_color_change():
 def color_decode():
     global color
     try:
-        R, G, B = color_var.get().split(",")
-        color = (int(R),int(G),int(B))
+        R, B, G = color_var.get().split(",")
+        color = (int(R),int(B),int(G))
+        print(color)
     except:
         pass
 
 def submit_filling():
     color_decode()
     if color_valid():
+        # cv2 use BRG, so we have to change format
+        global color
+        R, G, B = color
+        color = (B,G,R)
         top.destroy()
     else:
         tk.messagebox.showwarning('invalid color')
@@ -56,4 +61,4 @@ def color_valid():
     
 def to_hex():
     r, g, b = color
-    return f'#{int(round(r)):02x}{int(round(g)):02x}{int(round(b)):02x}'
+    return f'#{r:02x}{g:02x}{b:02x}'
