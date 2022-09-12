@@ -1,4 +1,6 @@
 from email import message
+from operator import truediv
+from pickle import FALSE, TRUE
 import tkinter as tk
 import globals
 from tkinter import messagebox
@@ -37,17 +39,15 @@ def popup_filling():
 
 def top_color_change():
     color_decode()
-    if color_valid():
+    try:
         top.config(bg = to_hex())
+    except:
+        pass
 
 def color_decode():
     global color
-    try:
-        R, B, G = color_var.get().split(",")
-        color = (int(R),int(B),int(G))
-        print(color)
-    except:
-        pass
+    R, B, G = color_var.get().split(",")
+    color = (int(R),int(B),int(G))
 
 def submit_filling():
         # cv2 use BRG, so we have to change format
@@ -63,8 +63,7 @@ def submit_filling():
     
 def color_valid():
     for i in color:
-        print(i)
-        if i < 0 | i > 255:
+        if i < 0 or i > 255:
             return False
     return True
     
