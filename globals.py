@@ -1,6 +1,5 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-from fillingColor import filling
 from cv2 import cvtColor, COLOR_BGR2RGB
 
 # this global is not important, saying window here only for convinient
