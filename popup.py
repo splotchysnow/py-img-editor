@@ -1,10 +1,7 @@
-from ctypes.wintypes import RGB
-from readline import insert_text
 import tkinter as tk
-from turtle import bgcolor
 import globals
 
-color = RGB(0,0,0)
+color = (0,0,0)
 
 def popup_filling():
     win = globals.window
