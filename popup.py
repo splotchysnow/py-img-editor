@@ -69,4 +69,5 @@ def color_valid():
     
 def to_hex():
     r, g, b = color
+    # background only accept hex format of color code
     return f'#{r:02x}{g:02x}{b:02x}'
