@@ -1,6 +1,7 @@
 """
 Create GUI with Tkinter for the software that we are designing.
 """
+from curses import window
 import cv2
 import tkinter as tk
 import globals
@@ -47,9 +48,11 @@ def main():
     loadImgButton.pack(side=tk.LEFT)
     save_button.pack(side = tk.LEFT)
     operation_side()
-    
+    window.bind('<Escape>', quit)
     window.mainloop()
 
+def quit(event):
+    globals.window.destroy()
 
 def loadIMG(path):
     try:
@@ -116,7 +119,6 @@ def create_button_in_operation(fra, fun_name,fun,):
         fg="black",
         command=lambda:fun()
     ).pack(side= tk.LEFT)
-    
     
 if __name__ == "__main__":
     main()
