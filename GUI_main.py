@@ -1,17 +1,8 @@
 """
 Create GUI with Tkinter for the software that we are designing.
 """
-from curses import window
-from email.mime import image
-from gc import callbacks
-from importlib.resources import path
-from PIL import Image, ImageTk
 import cv2
-from pickle import FRAME
 import tkinter as tk
-from turtle import fillcolor, left
-from matplotlib.pyplot import text
-import numpy
 import globals
 from fillingColor import filling
 

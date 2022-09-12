@@ -1,12 +1,4 @@
-from email import message
-from email.mime import image
-from hashlib import new
-from locale import YESEXPR
-from re import X
-from threading import stack_size
 import tkinter as tk
-from traceback import print_list
-from turtle import title
 import cv2
 import numpy
 import globals
