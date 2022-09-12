@@ -28,7 +28,10 @@ def filling():
     visited = {(xp, yp)}
     stack = [(xp,yp)]
 
-    tolerance = 10
+    try:
+        tolerance = int(popup.tol)
+    except:
+        tolerance = 5
     while len(stack) > 0:
         (x,y) = stack.pop()
         img_np[x][y] = new_color
