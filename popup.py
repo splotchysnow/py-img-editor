@@ -101,12 +101,12 @@ def popup_drawing():
         fg="black",
         command=line_mode
     )
-    circ_button = tk.Button(
+    oval_button = tk.Button(
         top_choosing_mode,
-        text="Drawing Circle",
+        text="Drawing Oval",
         bg='white',
         fg="black",
-        command=circ_mode
+        command=oval_mode
     )
     rect_button = tk.Button(
         top_choosing_mode,
@@ -116,7 +116,7 @@ def popup_drawing():
         command=rect_mode
     )
     lin_button.pack(side=tk.TOP)
-    circ_button.pack(side=tk.TOP)
+    oval_button.pack(side=tk.TOP)
     rect_button.pack(side=tk.TOP)
     top_choosing_mode.wait_variable(mode_num)
     return mode_num.get()
@@ -126,7 +126,7 @@ def line_mode():
     mode_num.set(1)
     top_choosing_mode.destroy()
 
-def circ_mode():
+def oval_mode():
     mode_num.set(2)
     top_choosing_mode.destroy()
     
