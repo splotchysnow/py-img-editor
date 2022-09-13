@@ -5,8 +5,6 @@ import tkinter as tk
 import globals
 from tkinter import messagebox
 
-color = (0,0,0)
-
 def popup_filling():
     win = globals.window
     global top
