@@ -4,13 +4,16 @@ def main():
     """
         Main function used for the whole flow of the GUI projects.
     """    
-    # Create an instance of Tkinter's Tk class. assign it to window variables.
-    window = globals.window
+    # # Create an instance of Tkinter's Tk class. assign it to window variables.
+    # window = globals.window
+    
     # Create Title Label
     frame = tk.Frame(window)
     frame.pack(side = tk.TOP)
-    global canvas
-    canvas = globals.canvas
+
+    # global canvas
+    # canvas = globals.canvas
+
     canvas.pack(side= tk.TOP)
     # Entry is ready to output the address 
     entryInput = tk.Entry(frame, width = 60, text="the absolute path of Img with suffix")

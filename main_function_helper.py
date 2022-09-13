@@ -1,9 +1,8 @@
 
 import cv2
 import tkinter as tk
-import globals
+from globals import *
 from fillingColor import filling
-
 
 def quit(event):
     """_summary_ Kill the GUI windows
@@ -21,16 +20,16 @@ def loadIMG(path):
     try:
         global img
         # load new image
-        globals.img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
-        img = globals.img
+        img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
+        # img = globals.img
         # globals.change_img(globals.img)
         height, width, no_channels = img.shape
         # Image.fromarray() will inverse color, here we change back
         # to make the save size as image
         canvas.config(width = width, height = height)
-        globals.update_canvas(img)
+        update_canvas(img)
         # as the img shows, function buttom will show up
-        globals.operation_frame.pack(side = tk.BOTTOM)
+        operation_frame.pack(side = tk.BOTTOM)
     except(FileNotFoundError):
         # the case that path is wrong
         wrong_path = "Doesn't exist image in the path \"" + path + "\""
@@ -57,7 +56,7 @@ def saveIMG(path):
 
 def operation_side():
     # Grabs the gloabl's frame containers to gather all the buttons.
-    operation_frame = globals.operation_frame
+    # operation_frame = globals.operation_frame
 
     # Creates all the nessiary buttons.
     create_button_in_operation(operation_frame, "Filling Color", filling)
