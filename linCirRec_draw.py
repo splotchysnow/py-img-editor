@@ -25,14 +25,20 @@ def end_draw(event):
     img = globals.img
     if mode_num == 1:
         #canvas.create_line(x_star, y_star, x_end, y_end, fill="#fb0")
-        cv2.line(img,(x_star, y_star),(x_end,y_end),color, 5)
+        cv2.line(img,(x_star, y_star),(x_end,y_end),color, 1)
     elif mode_num == 2:
-        cv2.circle(img,((x_star+x_end)/2, (y_star+y_end)/2), abs(x_star-x_end)/2, color, 3)
+        cv2.ellipse(img,(int((x_star+x_end)/2), int((y_star+y_end)/2)),
+                    (int(abs(x_star-x_end)/2), int(abs(y_star-y_end)/2)),
+                    0, 0, 360, color, 1)
     elif mode_num == 3:
         cv2.rectangle(img,(x_star, y_star),(x_end, y_end),color, 1)
     globals.update_canvas(img)
 
 
+
+"""
+If use pyhton3 linCirRec_draw.py, we can test this function, without going through the main GUI operation
+"""
 if __name__ == "__main__":
     canvas = globals.canvas
     canvas.pack(side= tk.TOP)
