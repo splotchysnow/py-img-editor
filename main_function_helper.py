@@ -4,6 +4,7 @@ import tkinter as tk
 from globals import *
 import globals
 from fillingColor import filling
+from linCirRec_draw import into_drawing_mode
 
 def quit(event):
     """_summary_ Kill the GUI windows
@@ -62,7 +63,7 @@ def operation_side():
     # Creates all the nessiary buttons.
     create_button_in_operation(operation_frame, "Filling Color", filling)
     # for fillingColor function, you have to enter the coordinate in terminal, and # filling color is fixed with purple, this will be optimized in the # future
-    create_button_in_operation(operation_frame, 1, print(2))
+    create_button_in_operation(operation_frame, "Drawing", into_drawing_mode)
     
     """
            IMPORTANT! PLEASE READ THIS,  BY XIAOXIA
