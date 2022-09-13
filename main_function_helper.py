@@ -2,6 +2,7 @@
 import cv2
 import tkinter as tk
 from globals import *
+import globals
 from fillingColor import filling
 
 def quit(event):
@@ -21,7 +22,7 @@ def loadIMG(path):
         global img
         # load new image
         img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
-        # img = globals.img
+        globals.img = img
         # globals.change_img(globals.img)
         height, width, no_channels = img.shape
         # Image.fromarray() will inverse color, here we change back
