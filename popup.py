@@ -3,8 +3,13 @@ from operator import truediv
 from pickle import FALSE, TRUE
 import tkinter as tk
 import globals
-from tkinter import messagebox
+from tkinter import Canvas, messagebox
 
+
+"""
+Start of pop_filling()
+    
+"""
 def popup_filling():
     win = globals.window
     global top
@@ -24,7 +29,7 @@ def popup_filling():
     button = tk.Button(
         top,
         text="Choose This Color",
-        bg='blue',
+        bg='white',
         fg="black",
         command=submit_filling
     )
@@ -69,3 +74,49 @@ def to_hex():
     r, g, b = color
     # background only accept hex format of color code
     return f'#{r:02x}{g:02x}{b:02x}'
+
+
+"""
+End of pop_filling here
+"""
+
+
+
+
+
+
+"""
+Start of pop_drawing
+"""
+def popup_drawing():
+    canvas = globals.canvas
+    top_choosing_mode = tk.Toplevel(canvas)
+    top_choosing_mode.grab_set()
+    top_choosing_mode.geometry("300x120")
+    global mode
+    lin_button = tk.Button(
+        top,
+        text="Drawing Line",
+        bg='white',
+        fg="black",
+        command= print()
+    )
+    Circ_button = tk.Button(
+        top,
+        text="Drawing Circle",
+        bg='white',
+        fg="black",
+        command=submit_filling
+    )
+    Rect_button = tk.Button(
+        top,
+        text="Drawing Rectangle",
+        bg='white',
+        fg="black",
+        command=submit_filling
+    )
+    
+    
+    
+    
+    
