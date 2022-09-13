@@ -1,9 +1,6 @@
-from email import message
-from operator import truediv
-from pickle import FALSE, TRUE
 import tkinter as tk
 import globals
-from tkinter import Canvas, messagebox
+from tkinter import messagebox
 
 
 """
@@ -88,34 +85,54 @@ End of pop_filling here
 """
 Start of pop_drawing
 """
+
 def popup_drawing():
-    canvas = globals.canvas
-    top_choosing_mode = tk.Toplevel(canvas)
+    win = globals.window
+    global top_choosing_mode
+    top_choosing_mode = tk.Toplevel(win)
     top_choosing_mode.grab_set()
     top_choosing_mode.geometry("300x120")
-    global mode
+    global mode_num
+    mode_num = tk.IntVar(top_choosing_mode)
     lin_button = tk.Button(
-        top,
+        top_choosing_mode,
         text="Drawing Line",
         bg='white',
         fg="black",
-        command= print()
+        command=line_mode
     )
-    Circ_button = tk.Button(
-        top,
+    circ_button = tk.Button(
+        top_choosing_mode,
         text="Drawing Circle",
         bg='white',
         fg="black",
-        command=submit_filling
+        command=circ_mode
     )
-    Rect_button = tk.Button(
-        top,
+    rect_button = tk.Button(
+        top_choosing_mode,
         text="Drawing Rectangle",
         bg='white',
         fg="black",
-        command=submit_filling
+        command=rect_mode
     )
+    lin_button.pack(side=tk.TOP)
+    circ_button.pack(side=tk.TOP)
+    rect_button.pack(side=tk.TOP)
+    top_choosing_mode.wait_variable(mode_num)
+    return mode_num.get()
     
+
+def line_mode():
+    mode_num.set(1)
+    top_choosing_mode.destroy()
+
+def circ_mode():
+    mode_num.set(2)
+    top_choosing_mode.destroy()
+    
+def rect_mode():
+    mode_num.set(3)
+    top_choosing_mode.destroy()
     
     
     
