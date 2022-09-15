@@ -10,6 +10,7 @@ def into_drawing_mode():
     canvas = globals.canvas
     global mode_num
     mode_num = popup.popup_drawing()
+    
     canvas.bind('<Button>', star_draw)
     canvas.bind('<ButtonRelease>', end_draw)
     

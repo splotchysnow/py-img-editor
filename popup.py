@@ -1,4 +1,5 @@
 import tkinter as tk
+from typing_extensions import IntVar
 import globals
 from tkinter import messagebox
 
@@ -35,7 +36,7 @@ def popup_filling():
     entry_input.pack(side=tk.TOP)
     tor_frame.pack(side=tk.TOP)
     button.pack(side=tk.TOP)
-    color_var.trace('w', lambda *args:top_color_change())
+    color_var.trace('w', lambda *args:top_color_change(color_var))
 
 def top_color_change():
     color_decode()
@@ -44,9 +45,9 @@ def top_color_change():
     except:
         pass
 
-def color_decode():
+def color_decode(var):
     global color
-    R, B, G = color_var.get().split(",")
+    R, B, G = var.get().split(",")
     color = (int(R),int(B),int(G))
 
 def submit_filling():
@@ -91,48 +92,93 @@ def popup_drawing():
     global top_choosing_mode
     top_choosing_mode = tk.Toplevel(win)
     top_choosing_mode.grab_set()
-    top_choosing_mode.geometry("300x120")
+    top_choosing_mode.geometry("300x90")
+    frame = top_choosing_mode.frame()
+    
     global mode_num
     mode_num = tk.IntVar(top_choosing_mode)
+    
+    def draw_mode(num):
+        mode_num.set(num)
+        frame.destroy()
+        canvas_for_example()
+        
     lin_button = tk.Button(
-        top_choosing_mode,
+        frame,
         text="Drawing Line",
+        width="12",
         bg='white',
         fg="black",
-        command=line_mode
+        command=lambda:draw_mode(1)
     )
     oval_button = tk.Button(
-        top_choosing_mode,
+        frame,
         text="Drawing Oval",
+        width="12",
         bg='white',
         fg="black",
-        command=oval_mode
+        command=lambda:draw_mode(2)
     )
     rect_button = tk.Button(
-        top_choosing_mode,
+        frame,
         text="Drawing Rectangle",
+        width="12",
         bg='white',
         fg="black",
-        command=rect_mode
+        command=lambda:draw_mode(3)
     )
     lin_button.pack(side=tk.TOP)
     oval_button.pack(side=tk.TOP)
     rect_button.pack(side=tk.TOP)
     top_choosing_mode.wait_variable(mode_num)
     return mode_num.get()
-    
 
-def line_mode():
-    mode_num.set(1)
-    top_choosing_mode.destroy()
-
-def oval_mode():
-    mode_num.set(2)
-    top_choosing_mode.destroy()
+def canvas_for_example():
+    top_choosing_mode.geometry("250x200")
     
-def rect_mode():
-    mode_num.set(3)
-    top_choosing_mode.destroy()
+    # make inner variables here
+    global save_var, draw_color_var, draw_thick_var
+    save_var = tk.IntVar(top_choosing_mode value=0)
+    draw_color_var = tk.StringVar(top_choosing_mode, value="0,0,0")
+    draw_thick_var = tk.IntVar(top_choosing_mode,value=1)
+    
+    # pack into top here
+    tem_canvas = tk.Canvas(top_choosing_mode)
+    frame_two_enties = tk.Frame(top_choosing_mode)
+    
+    save_color_think = tk.Button(
+        top_choosing_mode,
+        text="That's My Color & Thinkness",
+        textvariable=save_var,
+        bg='white',
+        fg='black',
+        command=exit_top
+    )
+    tem_canvas.pack(side=tk.TOP)
+    frame_two_enties(side=tk.TOP)
+    save_color_think(side=tk.TOP)
+    
+    #pack things into frame here
+    color_label = tk.Label(frame_two_enties, text="color")
+    color_entry = tk.Entry(frame_two_enties, textvariable=draw_color_var)
+    thick_label = tk.Label(frame_two_enties, text="thick")
+    thick_entry = tk.Entry(frame_two_enties, textvariable=draw_thick_var)
+    color_label.pack(side=tk.LEFT)
+    color_entry.pack(side=tk.LEFT)
+    thick_label.pack(side=tk.LEFT)
+    thick_entry.pack(side=tk.LEFT)
+    
+    #to monitor changes
+    global color, thick
+    color = (0,0,0)
+    thick = 1
+    draw_color_var.trace('w', lambda *args:draw_color_change())
+    draw_thick_var.trace('w', lambda *args:draw_thick_change())
+
+def draw(args):
+    
+    
+    
     
     
     
