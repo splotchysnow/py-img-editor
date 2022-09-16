@@ -220,7 +220,7 @@ def exit_top():
             messagebox(title='Invalid thinkness', message='2')
     else:
         messagebox(title='Invalid Color', message='1')
-            
+
 def thick_valid():
     if int(thick) > 0:
         return True
