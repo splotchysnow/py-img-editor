@@ -1,5 +1,5 @@
+from textwrap import fill
 import tkinter as tk
-from typing_extensions import IntVar
 import globals
 from tkinter import messagebox
 
@@ -38,8 +38,8 @@ def popup_filling():
     button.pack(side=tk.TOP)
     color_var.trace('w', lambda *args:top_color_change(color_var))
 
-def top_color_change():
-    color_decode()
+def top_color_change(var):
+    color_decode(var)
     try:
         top.config(bg = to_hex())
     except:
@@ -93,18 +93,14 @@ def popup_drawing():
     top_choosing_mode = tk.Toplevel(win)
     top_choosing_mode.grab_set()
     top_choosing_mode.geometry("300x90")
-    frame = top_choosing_mode.frame()
-    
+    global tem_frame
+    tem_frame = tk.Frame(top_choosing_mode)
+    print(type(tem_frame))
     global mode_num
     mode_num = tk.IntVar(top_choosing_mode)
-    
-    def draw_mode(num):
-        mode_num.set(num)
-        frame.destroy()
-        canvas_for_example()
         
     lin_button = tk.Button(
-        frame,
+        tem_frame,
         text="Drawing Line",
         width="12",
         bg='white',
@@ -112,7 +108,7 @@ def popup_drawing():
         command=lambda:draw_mode(1)
     )
     oval_button = tk.Button(
-        frame,
+        tem_frame,
         text="Drawing Oval",
         width="12",
         bg='white',
@@ -120,7 +116,7 @@ def popup_drawing():
         command=lambda:draw_mode(2)
     )
     rect_button = tk.Button(
-        frame,
+        tem_frame,
         text="Drawing Rectangle",
         width="12",
         bg='white',
@@ -130,53 +126,108 @@ def popup_drawing():
     lin_button.pack(side=tk.TOP)
     oval_button.pack(side=tk.TOP)
     rect_button.pack(side=tk.TOP)
+    tem_frame.pack()
     top_choosing_mode.wait_variable(mode_num)
-    return mode_num.get()
+    return mode_
+
+def draw_mode(num):
+    mode_num.set(num)
+    tem_frame.destroy()
+    canvas_for_example()
+
+
 
 def canvas_for_example():
-    top_choosing_mode.geometry("250x200")
-    
+    top_choosing_mode.geometry("240x240")
+    global mode_
+    mode_ = mode_num.get()
     # make inner variables here
+    global color, thick, shape
+    color = (0,0,0)
+    thick = 1
     global save_var, draw_color_var, draw_thick_var
-    save_var = tk.IntVar(top_choosing_mode value=0)
+    save_var = tk.IntVar(top_choosing_mode, value=0)
     draw_color_var = tk.StringVar(top_choosing_mode, value="0,0,0")
-    draw_thick_var = tk.IntVar(top_choosing_mode,value=1)
+    draw_thick_var = tk.StringVar(top_choosing_mode,value=str(thick))
     
-    # pack into top here
-    tem_canvas = tk.Canvas(top_choosing_mode)
+    # adding widges into top here
+    global tem_canvas
+    tem_canvas = tk.Canvas(top_choosing_mode, height=170)
     frame_two_enties = tk.Frame(top_choosing_mode)
     
-    save_color_think = tk.Button(
+    save_color_thick = tk.Button(
         top_choosing_mode,
         text="That's My Color & Thinkness",
-        textvariable=save_var,
         bg='white',
         fg='black',
         command=exit_top
     )
-    tem_canvas.pack(side=tk.TOP)
-    frame_two_enties(side=tk.TOP)
-    save_color_think(side=tk.TOP)
-    
+
+    if(mode_ == 1):
+        shape = tem_canvas.create_line(30,50,210,50,fill=to_hex(),width=thick)
+    elif(mode_ == 2):
+        shape = tem_canvas.create_oval(20,20,220,150,outline=to_hex(),width=thick)
+    else:
+        shape = tem_canvas.create_rectangle(50,50,190,120,outline=to_hex(),width=thick)
+        
     #pack things into frame here
-    color_label = tk.Label(frame_two_enties, text="color")
-    color_entry = tk.Entry(frame_two_enties, textvariable=draw_color_var)
-    thick_label = tk.Label(frame_two_enties, text="thick")
-    thick_entry = tk.Entry(frame_two_enties, textvariable=draw_thick_var)
+    color_label = tk.Label(frame_two_enties,text="color:")
+    color_entry = tk.Entry(frame_two_enties,width=5,textvariable=draw_color_var)
+    thick_label = tk.Label(frame_two_enties,text="thick:")
+    thick_entry = tk.Entry(frame_two_enties,width=2,textvariable=draw_thick_var)
     color_label.pack(side=tk.LEFT)
     color_entry.pack(side=tk.LEFT)
     thick_label.pack(side=tk.LEFT)
     thick_entry.pack(side=tk.LEFT)
     
-    #to monitor changes
-    global color, thick
-    color = (0,0,0)
-    thick = 1
-    draw_color_var.trace('w', lambda *args:draw_color_change())
-    draw_thick_var.trace('w', lambda *args:draw_thick_change())
-
-def draw(args):
     
+    tem_canvas.pack(side=tk.TOP, expand=tk.YES)
+    frame_two_enties.pack(side=tk.TOP)
+    save_color_thick.pack(side=tk.TOP)
+    
+    #to monitor changes
+    draw_color_var.trace('w', lambda *args:draw_color_change(draw_color_var))
+    draw_thick_var.trace('w', lambda *args:draw_thick_change(draw_thick_var))
+    top_choosing_mode.wait_variable(save_var)
+    
+def draw_color_change(var):
+    color_decode(var)
+    try:
+        if mode_ == 1:
+            tem_canvas.itemconfig(shape,fill=to_hex())
+        else:    
+            tem_canvas.itemconfig(shape,outline=to_hex())
+    except:
+        pass
+    
+def draw_thick_change(var):
+    global thick
+    thick = int(var.get())
+    try: 
+        tem_canvas.itemconfig(shape,width=thick)
+    except:
+        pass
+    
+def exit_top():
+    if color_valid():
+        if thick_valid():
+            save_var.set(1)
+            global color
+            R, G, B = color
+            color = (B,G,R)
+            top_choosing_mode.destroy()
+        else:
+            messagebox(title='Invalid thinkness', message='2')
+    else:
+        messagebox(title='Invalid Color', message='1')
+            
+def thick_valid():
+    if int(thick) > 0:
+        return True
+    return False
+    
+
+
     
     
     
