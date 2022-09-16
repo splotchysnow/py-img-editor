@@ -11,7 +11,7 @@ def quit(event):
     Args:
         event (_type_): _description_ takes and events arguments
     """
-    globals.window.destroy()
+    window.destroy()
 
 def loadIMG(path):
     """_summary_ Load the image through the path with the help of the global.py script

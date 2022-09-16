@@ -1,18 +1,24 @@
+from cProfile import label
+from email import message
 import tkinter as tk
+from globals import *
 import globals
 import cv2
 import popup
 
 
 def into_drawing_mode():
-    global canvas
-    canvas = globals.canvas
+    canvas.bind('a', stop_drawing)
     global mode_num, color, thick
     mode_num = popup.popup_drawing()
     color = popup.color
     thick = popup.thick
+    global press_S_to_stop_label
+    press_S_to_stop_label = tk.Label(window, font=("Arial", 25),text="Press S to stop Drawing")
+    hide_other()
     canvas.bind('<Button>', star_draw)
     canvas.bind('<ButtonRelease>', end_draw)
+    window.bind('<Key>', stop_drawing)
     
 def star_draw(event):
     global x_star, y_star
@@ -32,8 +38,19 @@ def end_draw(event):
                     0, 0, 360, color, thick)
     elif mode_num == 3:
         cv2.rectangle(img,(x_star, y_star),(x_end, y_end),color, thick)
-    globals.update_canvas(img)
+    update_canvas(img)
 
+def stop_drawing(event):
+    if(event.char == 's' or event.char == 'S'):
+        canvas.unbind('<Button>')
+        canvas.unbind('<ButtonRelease>')
+        press_S_to_stop_label.destroy()
+        operation_frame.pack()
+
+
+def hide_other():
+    operation_frame.pack_forget()
+    press_S_to_stop_label.pack()
 
 
 """

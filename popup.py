@@ -1,7 +1,19 @@
-from textwrap import fill
 import tkinter as tk
-import globals
-from tkinter import messagebox
+from globals import window
+from tkinter import Toplevel, messagebox
+from tkinter import ttk
+
+
+
+# To position top in the center
+def position_center(top_name, width, height):
+    winx = window.winfo_x()
+    winy = window.winfo_y()
+    winW = window.winfo_width()
+    winH = window.winfo_height()
+    top_name.geometry("%dx%d+%d+%d" % (width, height, winx+(winW-width)/2, winy+(winH-height)/2-20))
+
+
 
 
 """
@@ -9,14 +21,13 @@ Start of pop_filling()
     
 """
 def popup_filling():
-    win = globals.window
     global top
-    top = tk.Toplevel(win)
+    top = tk.Toplevel(window)
     top.grab_set()
-    top.geometry("450x120")
-    global color_var
+    position_center(top_name=top, width=450, height=120)
+    #top.geometry("450x120+%d+%d",winx,winy)
     color_var = tk.StringVar(top, value="250,200,200")
-    top_color_change()
+    top_color_change(color_var)
     entry_input = tk.Entry(top, width = 9, font = ('bold',20), textvariable= color_var)
     tor_frame = tk.Frame(top)
     tor_msg = tk.Label(tor_frame, font=('',10), text="Color Difference tolerance, 0 - 100")
@@ -88,9 +99,8 @@ Start of pop_drawing
 """
 
 def popup_drawing():
-    win = globals.window
     global top_choosing_mode
-    top_choosing_mode = tk.Toplevel(win)
+    top_choosing_mode = tk.Toplevel(window)
     top_choosing_mode.grab_set()
     top_choosing_mode.geometry("300x90")
     global tem_frame
