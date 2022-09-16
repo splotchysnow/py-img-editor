@@ -9,9 +9,9 @@ from tkinter import ttk
 def position_center(top_name, width, height):
     winx = window.winfo_x()
     winy = window.winfo_y()
-    winW = window.winfo_width()
-    winH = window.winfo_height()
-    top_name.geometry("%dx%d+%d+%d" % (width, height, winx+(winW-width)/2, winy+(winH-height)/2-20))
+    win_W = window.winfo_width()
+    win_H = window.winfo_height()
+    top_name.geometry("%dx%d+%d+%d" % (width, height, winx+(win_W-width)/2, winy+(win_H-height)/2-20))
 
 
 
@@ -25,12 +25,11 @@ def popup_filling():
     top = tk.Toplevel(window)
     top.grab_set()
     position_center(top_name=top, width=450, height=120)
-    #top.geometry("450x120+%d+%d",winx,winy)
     color_var = tk.StringVar(top, value="250,200,200")
     top_color_change(color_var)
     entry_input = tk.Entry(top, width = 9, font = ('bold',20), textvariable= color_var)
     tor_frame = tk.Frame(top)
-    tor_msg = tk.Label(tor_frame, font=('',10), text="Color Difference tolerance, 0 - 100")
+    tor_msg = tk.Label(tor_frame, font=('',10), text="Color Difference tolerance, 0 - 100, default is 10")
     global entry_tor
     entry_tor = tk.Entry(tor_frame, font=('',8), width = 3)
     tor_msg.pack(side=tk.LEFT)

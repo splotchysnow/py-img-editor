@@ -1,6 +1,6 @@
 import tkinter as tk
 import cv2
-import numpy
+import numpy as np
 import globals
 import popup
 import tkinter as tk
@@ -31,7 +31,7 @@ def filling():
     try:
         tolerance = int(popup.tol)
     except:
-        tolerance = 5
+        tolerance = 10
     while len(stack) > 0:
         (x,y) = stack.pop()
         img_np[x][y] = new_color
@@ -73,4 +73,4 @@ def get_post(event):
     
     
 def compare_two_pixel(curr, standard, tor):
-    return abs(curr[0] - standard[0]) + abs(curr[1] - standard[1]) + abs(curr[2] - standard[2]) <= tor
+    return np.sum(np.abs(np.subtract(curr,standard))) <= tor
