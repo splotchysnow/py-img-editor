@@ -64,7 +64,6 @@ def filling():
     globals.update_canvas(img_np)
 
 def get_post(event):
-    print(event)
 
     global xp, yp
     xp = event.y

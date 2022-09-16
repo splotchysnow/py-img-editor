@@ -1,3 +1,5 @@
+"""_summary_: Used for global functions and declarations."""
+
 import tkinter as tk
 from PIL import Image, ImageTk
 from cv2 import cvtColor, COLOR_BGR2RGB
