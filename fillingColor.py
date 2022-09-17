@@ -1,6 +1,7 @@
 import tkinter as tk
 import numpy as np
 import globals
+from globals import window, canvas, update_canvas
 import popup
 import tkinter as tk
 # remeber to import globals
@@ -12,8 +13,8 @@ def filling():
     # globals.canvas.focus_set()
     global xp,yp,pos
     pos = tk.IntVar()
-    globals.window.bind("<Button-1>", get_post)
-    globals.canvas.wait_variable(pos)
+    window.bind("<Button-1>", get_post)
+    canvas.wait_variable(pos)
     # just import globals.img to the one you wanna edit, or you can just use globals.img as variable to process, but assign a new one would save many word. img will be the form that can be thought as img = imread(something)
     img_np = globals.img
     # img_np = numpy.array(globals.img) also works, if you prefer to make it to be numpy.array, but I don't know it in deeper
@@ -60,7 +61,7 @@ def filling():
                 stack.append((x, y + 1))
                 
     # in the end, you HAVE TO update it, img_np is the form of array, you can think of it as imshow(window, img_np) if that helps
-    globals.update_canvas(img_np)
+    update_canvas(img_np)
 
 def get_post(event):
 

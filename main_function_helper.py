@@ -77,13 +77,13 @@ def operations_side():
            新的function文件里 import globals文件, 
            在最前面用 img = globals.img 把图片载进来
            ...
-           img是array type，此处对img进行function处理
+           img是array type,此处对img进行处理
            ...
-           在function结尾处，用(此处可能用或不用globlas)update_canvas(img)来把图片存进globals里，并在canvas上显示出来
+           在function结尾处,用(此处可能用或不用globlas)update_canvas(img)来把图片存进globals里,并在canvas上显示出来
            
-           调试的时候可以用if __name__ == "__main__": 来辅助调试，这样就不用每次通过GUI_main 来进入function，你可以在linCirRec_draw.py的底部找到后复制粘贴
+           调试的时候可以用if __name__ == "__main__": 来辅助调试,这样就不用每次通过GUI_main 来进入function,你可以在linCirRec_draw.py的底部找到后复制粘贴
            
-           最后如果运行没问题，在本段话下方找个坑位把Button name和function name 填上，以及记得在本文件开头import一下你的function
+           最后如果运行没问题,在本段话下方找个坑位把Button name和function name 填上,以及记得在本文件开头import一下你的function
     """
     create_button_in_operation(operation_frame, 2, print(3))
     create_button_in_operation(operation_frame, 3, print(4))
