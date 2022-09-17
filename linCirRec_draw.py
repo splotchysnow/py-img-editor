@@ -59,11 +59,11 @@ If use pyhton3 linCirRec_draw.py, we can test this function, without going throu
 if __name__ == "__main__":
     canvas = globals.canvas
     canvas.pack(side= tk.TOP)
-    path = '/Users/natsu/Documents/ProgrammingProject/py-img-editor/img/Jump.jpg'
+    path = 'img/Jump.jpg'
     img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
     globals.img = img
-    globals.update_canvas(img)
+    update_canvas(img)
     height, width, no_channels = img.shape
     canvas.config(width = width, height = height)
     into_drawing_mode()
-    globals.window.mainloop()
+    window.mainloop()

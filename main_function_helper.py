@@ -13,7 +13,7 @@ def quit(event):
     """
     window.destroy()
 
-def loadIMG(path):
+def load_img(path):
     """_summary_ Load the image through the path with the help of the global.py script
 
     Args:
@@ -42,7 +42,7 @@ def loadIMG(path):
         tk.messagebox.showwarning(title="Not Applicable", message="This img is not applicable")
     # it will give AttributeError: module 'tkinter' has no attribute 'update', but we can just ignor it
     
-def saveIMG(path):
+def save_img(path):
     """_summary_: saves image to the path.
 
     Args:
@@ -56,7 +56,7 @@ def saveIMG(path):
     except NameError:
         tk.messagebox.showwarning(title="No Image Loaded Yet", message= "You Have To Have Image To Save")
 
-def operation_side():
+def operations_side():
     # Grabs the gloabl's frame containers to gather all the buttons.
     # operation_frame = globals.operation_frame
 
@@ -67,12 +67,23 @@ def operation_side():
     
     """
            IMPORTANT! PLEASE READ THIS,  BY XIAOXIA
+           1.import globals to your file, then you can deal with globals.img, globals.window, globals.canvsa
+    
+           2. My way is to have no para in the function, I can just write name of fucntion in here, otherwise we have to use lambda 
+    
+           3. if you wanna use the same way as me, import img from globals.py, and globals.update_canvas(img_after_change) in the end will be fine. More illustrates and comments is in the fillingColor.py
            
-           1.if after you implement your function, you see color got inverse or may not. Because Image.fromarray() will inverse color, but at some point it reverse back by cvtColor, don't worry if showing wrong color, it will be fixed at high-level
-    
-           2. My way is to have no para in the function, then import img from globals.py to process, just recommend.
-    
-           3. if you wanna use the same way as me, import img from globals.py, and globals.update_canvas(img_after_change) in the end will be fine. More illustrates and comments is in the fillingColor
+           太长不看版：
+           新的function文件里 import globals文件, 
+           在最前面用 img = globals.img 把图片载进来
+           ...
+           img是array type，此处对img进行function处理
+           ...
+           在function结尾处，用(此处可能用或不用globlas)update_canvas(img)来把图片存进globals里，并在canvas上显示出来
+           
+           调试的时候可以用if __name__ == "__main__": 来辅助调试，这样就不用每次通过GUI_main 来进入function，你可以在linCirRec_draw.py的底部找到后复制粘贴
+           
+           最后如果运行没问题，在本段话下方找个坑位把Button name和function name 填上，以及记得在本文件开头import一下你的function
     """
     create_button_in_operation(operation_frame, 2, print(3))
     create_button_in_operation(operation_frame, 3, print(4))
