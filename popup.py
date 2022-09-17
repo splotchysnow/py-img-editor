@@ -5,7 +5,9 @@ from tkinter import ttk
 
 
 
-# To position top in the center
+"""
+To put the Toplevel popup on the center of current window, it is recommend to ues position_center() right after you implement top level
+"""
 def position_center(top_name, width, height):
     winx = window.winfo_x()
     winy = window.winfo_y()
@@ -17,7 +19,7 @@ def position_center(top_name, width, height):
 
 
 """
-Start of pop_filling()
+Start of pop_filling(), it it build for fillingColor.py
     
 """
 def popup_filling():
@@ -94,7 +96,7 @@ End of pop_filling here
 
 
 """
-Start of pop_drawing
+Start of pop_drawing(), it is build for linCirRec_draw.py
 """
 
 def popup_drawing():
@@ -143,8 +145,6 @@ def draw_mode(num):
     mode_num.set(num)
     tem_frame.destroy()
     canvas_for_example()
-
-
 
 def canvas_for_example():
     top_choosing_mode.geometry("240x240")

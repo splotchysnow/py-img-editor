@@ -1,7 +1,5 @@
-from cProfile import label
-from email import message
 import tkinter as tk
-from globals import *
+from globals import update_canvas, operation_frame, window, canvas
 import globals
 import cv2
 import popup
@@ -57,7 +55,6 @@ def hide_other():
 If use pyhton3 linCirRec_draw.py, we can test this function, without going through the main GUI operation
 """
 if __name__ == "__main__":
-    canvas = globals.canvas
     canvas.pack(side= tk.TOP)
     path = 'img/Jump.jpg'
     img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
