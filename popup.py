@@ -11,9 +11,10 @@ To put the Toplevel popup on the center of current window, it is recommend to ue
 def position_center(top_name, width, height):
     winx = window.winfo_x()
     winy = window.winfo_y()
-    win_W = window.winfo_width()
-    win_H = window.winfo_height()
-    top_name.geometry("%dx%d+%d+%d" % (width, height, winx+(win_W-width)/2, winy+(win_H-height)/2-20))
+    win_w = window.winfo_width()
+    win_h = window.winfo_height()
+    top_name.geometry("%dx%d+%d+%d" % (width, height, winx+(win_w-width)/2, winy+(win_h-height)/2-20))
+    # I don't want top-up be right center, so I get it down by 20
 
 
 
@@ -23,27 +24,27 @@ Start of pop_filling(), it it build for fillingColor.py
     
 """
 def popup_filling():
-    global top
-    top = tk.Toplevel(window)
-    top.grab_set()
-    position_center(top_name=top, width=450, height=120)
-    color_var = tk.StringVar(top, value="250,200,200")
+    global top_filling
+    top_filling = tk.Toplevel(window)
+    top_filling.grab_set()
+    position_center(top_name=top_filling, width=450, height=120)
+    color_var = tk.StringVar(top_filling, value="250,200,200")
     top_color_change(color_var)
-    entry_input = tk.Entry(top, width = 9, font = ('bold',20), textvariable= color_var)
-    tor_frame = tk.Frame(top)
+    entry_input = tk.Entry(top_filling, width = 9, font = ('bold',20), textvariable= color_var)
+    tor_frame = tk.Frame(top_filling)
     tor_msg = tk.Label(tor_frame, font=('',10), text="Color Difference tolerance, 0 - 100, default is 10")
     global entry_tor
     entry_tor = tk.Entry(tor_frame, font=('',8), width = 3)
     tor_msg.pack(side=tk.LEFT)
     entry_tor.pack(side=tk.LEFT)
     button = tk.Button(
-        top,
+        top_filling,
         text="Choose This Color",
         bg='white',
         fg="black",
         command=submit_filling
     )
-    msg = tk.Label(top, font=('bold',20),text="Input the Color you wanna fill, with #,#,# in RGB", bg='white')
+    msg = tk.Label(top_filling, font=('bold',20),text="Input the Color you wanna fill, with #,#,# in RGB", bg='white')
     msg.pack(side=tk.TOP)
     entry_input.pack(side=tk.TOP)
     tor_frame.pack(side=tk.TOP)
@@ -53,7 +54,7 @@ def popup_filling():
 def top_color_change(var):
     color_decode(var)
     try:
-        top.config(bg = to_hex())
+        top_filling.config(bg = to_hex())
     except:
         pass
 
@@ -70,7 +71,7 @@ def submit_filling():
         global tol
         tol = entry_tor.get()
         color = (B,G,R)
-        top.destroy()
+        top_filling.destroy()
     else:
         messagebox.showwarning(title='Invalid Color' ,message='should be #,#,# formate, and each # between 0 to 255')
     
@@ -102,8 +103,8 @@ Start of pop_drawing(), it is build for linCirRec_draw.py
 def popup_drawing():
     global top_choosing_mode
     top_choosing_mode = tk.Toplevel(window)
+    position_center(top_choosing_mode, 300, 90)
     top_choosing_mode.grab_set()
-    top_choosing_mode.geometry("300x90")
     global tem_frame
     tem_frame = tk.Frame(top_choosing_mode)
     print(type(tem_frame))
@@ -235,6 +236,9 @@ def thick_valid():
         return True
     return False
     
+"""
+End of pop_up_drawing here
+"""
 
 
     

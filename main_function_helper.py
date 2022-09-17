@@ -101,9 +101,10 @@ def create_button_in_operation(fra, fun_name,fun,):
     """
     tk.Button(
         fra,
-        width= 8,
+        width= 10,
         height= 2,
         text=fun_name,
+        font=("Didot", 14),
         bg="white",
         fg="black",
         command=lambda:fun()
