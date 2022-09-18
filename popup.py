@@ -1,7 +1,7 @@
+from curses.ascii import isdigit
 import tkinter as tk
 from globals import window
-from tkinter import Toplevel, messagebox
-from tkinter import ttk
+from tkinter import messagebox
 
 
 
@@ -13,8 +13,8 @@ def position_center(top_name, width, height):
     winy = window.winfo_y()
     win_w = window.winfo_width()
     win_h = window.winfo_height()
-    top_name.geometry("%dx%d+%d+%d" % (width, height, winx+(win_w-width)/2, winy+(win_h-height)/2-20))
-    # I don't want top-up be right center, so I get it down by 20
+    top_name.geometry("%dx%d+%d+%d" % (width, height, winx+(win_w-width)/2, winy+(win_h-height)/2-30))
+    # I don't want top-up be right center, so I get it down by 30
 
 
 
@@ -195,7 +195,7 @@ def canvas_for_example():
     frame_two_enties.pack(side=tk.TOP)
     save_color_thick.pack(side=tk.TOP)
     
-    #to monitor changes
+    #to monitor changes, think or color
     draw_color_var.trace('w', lambda *args:draw_color_change(draw_color_var))
     draw_thick_var.trace('w', lambda *args:draw_thick_change(draw_thick_var))
     top_choosing_mode.wait_variable(save_var)
@@ -212,7 +212,7 @@ def draw_color_change(var):
     
 def draw_thick_change(var):
     global thick
-    thick = int(var.get())
+    thick = var.get()
     try: 
         tem_canvas.itemconfig(shape,width=thick)
     except:
@@ -227,14 +227,12 @@ def exit_top():
             color = (B,G,R)
             top_choosing_mode.destroy()
         else:
-            messagebox(title='Invalid thinkness', message='2')
+            messagebox.showwarning(title='Invalid thinkness', message='thick should be number and larger than 0')
     else:
-        messagebox(title='Invalid Color', message='1')
+        messagebox.showwarning(title='Invalid Color', message='color should be as form as #,#,#, with each # between 0 and 225')
 
 def thick_valid():
-    if int(thick) > 0:
-        return True
-    return False
+    return thick.isnumeric() and int(thick) > 0
     
 """
 End of pop_up_drawing here

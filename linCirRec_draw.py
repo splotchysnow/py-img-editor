@@ -10,7 +10,7 @@ def into_drawing_mode():
     global mode_num, color, thick
     mode_num = popup.popup_drawing()
     color = popup.color
-    thick = popup.thick
+    thick = int(popup.thick)
     global press_S_to_stop_label
     press_S_to_stop_label = tk.Label(window, font=("Arial", 25),text="Press S to stop Drawing")
     hide_other()
