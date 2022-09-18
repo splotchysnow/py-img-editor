@@ -105,10 +105,8 @@ def popup_drawing():
     top_choosing_mode = tk.Toplevel(window)
     position_center(top_choosing_mode, 300, 90)
     top_choosing_mode.grab_set()
-    global tem_frame
+    global tem_frame, mode_num
     tem_frame = tk.Frame(top_choosing_mode)
-    print(type(tem_frame))
-    global mode_num
     mode_num = tk.IntVar(top_choosing_mode)
         
     lin_button = tk.Button(
@@ -149,12 +147,12 @@ def draw_mode(num):
 
 def canvas_for_example():
     top_choosing_mode.geometry("240x240")
-    global mode_
+    # mode is which shape we choose, shape is the object we will create later
+    global mode_, color, thick, shape
     mode_ = mode_num.get()
-    # make inner variables here
-    global color, thick, shape
     color = (0,0,0)
     thick = 1
+    # make inner variables here
     global save_var, draw_color_var, draw_thick_var
     save_var = tk.IntVar(top_choosing_mode, value=0)
     draw_color_var = tk.StringVar(top_choosing_mode, value="0,0,0")
