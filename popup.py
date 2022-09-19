@@ -230,7 +230,7 @@ def exit_top():
         messagebox.showwarning(title='Invalid Color', message='color should be as form as #,#,#, with each # between 0 and 225')
 
 def thick_valid():
-    return thick.isnumeric() and int(thick) > 0
+    return int(thick) > 0
     
 """
 End of pop_up_drawing here

@@ -6,7 +6,6 @@ import popup
 
 
 def into_drawing_mode():
-    canvas.bind('a', stop_drawing)
     global mode_num, color, thick
     mode_num = popup.popup_drawing()
     color = popup.color
