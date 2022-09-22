@@ -22,7 +22,7 @@ def load_img(path):
     try:
         global img
         # load new image
-        img = cv2.imread(cv2.samples.findFile(path), cv2.IMREAD_UNCHANGED)
+        img = cv2.imread(cv2.samples.findFile(path.strip()), cv2.IMREAD_UNCHANGED)
         globals.img = img
         # globals.change_img(globals.img)
         height, width, no_channels = img.shape
